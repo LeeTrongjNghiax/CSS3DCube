@@ -1,0 +1,87 @@
+:root {
+  --length: 100px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: monospace;
+  background-color: black;
+  color: white;
+}
+
+.rubik-cube {
+  margin-top: 50px;
+  margin-bottom: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rubik-cube > .core {
+  width: var(--length);
+  height: var(--length);
+  transform-style: preserve-3d;
+  position: relative;
+  animation: loop 10s linear infinite;
+  transform-origin: 50% 50%;
+  background-color: none;
+}
+
+.face {
+  width: var(--length);
+  height: var(--length);
+
+  border: 2px solid white;
+  font-size: 20px;
+  font-weight: bolder;
+
+  position: absolute;
+  opacity: 0.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#up {
+  background-color: yellow;
+  transform: rotateX(90deg) translateZ(calc(var(--length) / 2));
+}
+
+#down {
+  background-color: white;
+  transform: rotateX(-90deg) translateZ(calc(var(--length) / 2));
+}
+
+#front {
+  background-color: green;
+  transform: translateZ(calc(var(--length) / 2));
+}
+
+#back {
+  background-color: blue;
+  transform: rotateY(180deg) translateZ(calc(var(--length) / 2));
+}
+
+#right {
+  background-color: red;
+  transform: rotateY(90deg) translateZ(calc(var(--length) / 2));
+}
+
+#left {
+  background-color: orange;
+  transform: rotateY(-90deg) translateZ(calc(var(--length) / 2));
+}
+
+input[type=range] {
+  width: 80%;
+}
+
+/* @keyframes loop {
+  from {
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+  to {
+    transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+  }
+} */
