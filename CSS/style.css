@@ -7,6 +7,11 @@
   --rubik-blue-color: rgb(0 0 255 / 1);
   --rubik-gray-color: rgb(20 20 20 / 1);
 
+  --rubik-red-color: rgb(20 20 20 / 1);
+  --rubik-orange-color: rgb(20 20 20 / 1);
+  --rubik-green-color: rgb(20 20 20 / 1);
+  --rubik-blue-color: rgb(20 20 20 / 1);
+
   --text-selection-color: rgb(0 0 0 / 1);
   --text-selection-background-color: rgb(255 255 255 / 1);
   --text-color: rgb(255 255 255 / 1);
@@ -36,6 +41,10 @@
 * {
   padding: 0;
   margin: 0;
+  background-color: rgb(18 18 18 / 1);
+  color: white;
+  font-family: monospace;
+  font-size: 20px;
 }
 
 body {
@@ -110,8 +119,8 @@ body {
 }
 
 svg {
-  width: 100vh;
-  height: 100vh;
+  width: 95vh;
+  height: 95vh;
   background-color: var(--background-color);
 }
 
