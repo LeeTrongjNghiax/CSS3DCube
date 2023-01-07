@@ -7,13 +7,98 @@
   <title>3D Cube</title>
 
   <link rel="stylesheet" href="CSS/style.css">
-  <script src="script.js" defer></script>
 </head>
 <body>
-  <div class="container">
-    <div class="img"></div>
-    <div class="move"></div>
+  <div class="rubik-cube">
+    <div class="core">
+      <div id="up" class="face">UP</div>
+      <div id="down" class="face">DOWN</div>
+      <div id="front" class="face">FRONT</div>
+      <div id="back" class="face">BACK</div>
+      <div id="right" class="face">RIGHT</div>
+      <div id="left" class="face">LEFT</div>
+    </div>
   </div>
 
+  <a id="showControl">Show control</a>
+
+  <div id="control">
+    <label for="length">Cube length:</label>
+    <input type="range" name="length" min="50" max="500" value="100" id="length">
+    <span id="resultLength"></span>
+    <br>
+
+    <label for="rotateY">Rotate X:</label>
+    <input type="range" name="rotateX" min="-360" max="360" value="0" id="rotateX">
+    <span id="resultRX"></span>
+    <br>
+
+    <label for="rotateY">Rotate Y:</label>
+    <input type="range" name="rotateY" min="-360" max="360" value="0" id="rotateY">
+    <span id="resultRY"></span>
+    <br>
+
+    <label for="rotateY">Rotate Z:</label>
+    <input type="range" name="rotateZ" min="-360" max="360" value="0" id="rotateZ">
+    <span id="resultRZ"></span>
+    <br>
+
+    <label for="translateX">Translate X:</label>
+    <input type="range" name="translateX" min="-500" max="500" value="0" id="translateX">
+    <span id="resultTX"></span>
+    <br>
+
+    <label for="translateY">Translate Y:</label>
+    <input type="range" name="translateY" min="-500" max="500" value="0" id="translateY">
+    <span id="resultTY"></span>
+    <br>
+
+    <label for="translateZ">Translate Z:</label>
+    <input type="range" name="translateZ" min="-500" max="500" value="0" id="translateZ">
+    <span id="resultTZ"></span>
+    <br>
+
+    <label for="perspective">Perspective:</label>
+    <input type="range" name="perspective" min="0" max="2000" value="1000" id="perspective">
+    <span id="resultP"></span>
+    <br>
+  </div>
+
+  <script>
+    document.querySelector("#showControl").addEventListener("click", () => {
+      if (document.querySelector("#control").style.left == "-90%")
+        document.querySelector("#control").style.left = "0%";
+      else 
+        document.querySelector("#control").style.left = "-90%";
+    })
+    
+    loop = () => {
+      let cL = document.querySelector("#length");
+      let rX = document.querySelector("#rotateX");
+      let rY = document.querySelector("#rotateY");
+      let rZ = document.querySelector("#rotateZ");
+      let tX = document.querySelector("#translateX");
+      let tY = document.querySelector("#translateY");
+      let tZ = document.querySelector("#translateZ");
+      let p = document.querySelector("#perspective");
+
+      document.querySelector("#resultLength").innerHTML = cL.value;
+      document.querySelector("#resultRX").innerHTML = rX.value;
+      document.querySelector("#resultRY").innerHTML = rY.value;
+      document.querySelector("#resultRZ").innerHTML = rZ.value;
+      document.querySelector("#resultTX").innerHTML = tX.value;
+      document.querySelector("#resultTY").innerHTML = tY.value;
+      document.querySelector("#resultTZ").innerHTML = tZ.value;
+      document.querySelector("#resultP").innerHTML = p.value;
+
+      document.querySelector(".rubik-cube > .core").style.transform = `rotateX(${rX.value}deg) rotateY(${rY.value}deg) rotateZ(${rZ.value}deg) translateX(${tX.value}px) translateY(${tY.value}px) translateZ(${tZ.value}px)`;
+      document.querySelector(".rubik-cube").style.perspective = `${p.value}px`;
+      document.querySelector(':root').style.setProperty("--length", `${cL.value}px`);
+
+      requestAnimationFrame(loop)
+    }
+
+    loop();
+  </script>
 </body>
 </html>
