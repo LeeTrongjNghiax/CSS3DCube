@@ -1,66 +1,81 @@
 :root {
 	--length: 40vh;
-	--border-length: 0.9vh;
+	--border-length: 1vh;
 	--length-ratio: 3;
 }
 
 * {
-  	padding: 0;
+	padding: 0;
 	margin: 0;
 	font-family: monospace;
+	box-sizing: border-box;
 
 	background-color: rgba(05, 05, 05, 05);
-	font-size: calc( var(--length) / 16 );
+	color: rgba(255, 255, 255, 1);
+	font-size: calc( var(--length) / 10 );
+}
+
+body {
+	width: 100vw;
+	height: 100vh;
+	overflow-x: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	gap: 5vh;
 }
 
 #container {
-	position: absolute;
+	/* position: absolute;
 	top: 50%;
-	left: 50%;
+	left: 50%; */
 	width: 80vh;
 	height: 80vh;
-	transform: translate(-50%, -50%);
+	/* transform: translate(-50%, -50%); */
 	
 	background-color: rgba(25, 25, 25, 05);
 	box-shadow: 1vh 1vh 3vh rgba(150, 150, 150, 0.5);
 }
 
 #rubik-cube {
-	position: absolute;
+	position: relative;
 	top: 50%;
 	left: 50%;
 	width: var(--length);
 	height: var(--length);
 	transform-style: preserve-3d;
 	display: flex;
-  	align-items: center;
-  	justify-content: center;
+	align-items: center;
+	justify-content: center;
 
-	perspective: 2000vh;
+	perspective: 9000vh;
 	background-color: rgba(0, 0, 200, 0);
-	transform: translate(-50%, -50%) rotateY(43deg) rotateX(334deg);
+	transform: translate(-50%, -50%) rotateY(19deg) rotateX(334deg);
 }
 
 #rubik-cube .cubie {
-	width: calc( var(--length) / var(--length-ratio) - var(--border-length) );
-  	height: calc( var(--length) / var(--length-ratio) - var(--border-length) );
-  	transform-style: preserve-3d;
+	width: calc( var(--length) / var(--length-ratio) );
+	height: calc( var(--length) / var(--length-ratio) );
+	transform-style: preserve-3d;
 	position: absolute;
 
-	background-color: rgba(0, 0, 0, 0);
+	background-color: rgba(200, 0, 0, 0.1);
 }
 
 .face {
-	width: calc( var(--length) / var(--length-ratio) - var(--border-length) );
-	height: calc( var(--length) / var(--length-ratio) - var(--border-length) );
+	width: calc( var(--length) / var(--length-ratio) );
+	height: calc( var(--length) / var(--length-ratio) );
+	transform-style: preserve-3d;
 	font-weight: bolder;
 	position: absolute;
 	display: flex;
-  	align-items: center;
-  	justify-content: center;
+	align-items: center;
+	justify-content: center;
+	font-size: 0;
 
 	border: var(--border-length) solid black;
-	opacity: 1;
+	opacity: 0.75;
 }
 
 .up {
@@ -90,7 +105,10 @@
 .orange { background-color: orange; }
 .black { background-color: black; }
 
-#U { transform: translateY( calc( var(--length) / var(--length-ratio) * -1 ) ); }
+#U { 
+	/* transform: translateY( calc( var(--length) / var(--length-ratio) * -1 ) );  */
+	top: 0;
+}
 #D { transform: translateY( calc( var(--length) / var(--length-ratio) * 1 ) ); }
 #F { transform: translateZ( calc( var(--length) / var(--length-ratio) * 1 ) ); }
 #B { transform: translateZ( calc( var(--length) / var(--length-ratio) * -1 ) ); }
@@ -98,6 +116,8 @@
 #L { transform: translateX( calc( var(--length) / var(--length-ratio) * -1 ) ); }
 
 #UF {
+	/* bottom: calc( var(--length) - var(--length) / 3 ); */
+	/* transform: translateZ( calc( var(--length) / var(--length-ratio) * 1 ) ); */
 	transform: 
 		translateY( calc( var(--length) / var(--length-ratio) * -1 ) ) 
 		translateZ( calc( var(--length) / var(--length-ratio) * 1 ) );
@@ -209,4 +229,30 @@
 		translateY( calc( var(--length) / var(--length-ratio) * 1 ) ) 
 		translateZ( calc( var(--length) / var(--length-ratio) * -1 ) ) 
 		translateX( calc( var(--length) / var(--length-ratio) * -1 ) );
+}
+
+/* #U.cubie {
+	top: 0;
+}
+
+#U.cubie::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  content: '';
+  background-color: #f0f;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+} */
+
+#control {
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+}
+
+#control button {
+	padding: 2vh;
 }
