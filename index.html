@@ -1,104 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>3D Cube</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
 
-  <link rel="stylesheet" href="CSS/style.css">
+	<link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
-  <div class="rubik-cube">
-    <div class="core">
-      <div id="up" class="face">UP</div>
-      <div id="down" class="face">DOWN</div>
-      <div id="front" class="face">FRONT</div>
-      <div id="back" class="face">BACK</div>
-      <div id="right" class="face">RIGHT</div>
-      <div id="left" class="face">LEFT</div>
-    </div>
-  </div>
+  <div id="container">
+		<div id="rubik-cube">
+			<div id="core" class="cubie">
+				<div class="up face black">UP</div>
+				<div class="down face black">DOWN</div>
+				<div class="front face black">FRONT</div>
+				<div class="back face black">BACK</div>
+				<div class="right face black">RIGHT</div>
+				<div class="left face black">LEFT</div>
+			</div>
+			<div id="U" class="cubie center">
+				<div class="up face white">UP</div>
+				<div class="down face black">DOWN</div>
+				<div class="front face black">FRONT</div>
+				<div class="back face black">BACK</div>
+				<div class="right face black">RIGHT</div>
+				<div class="left face black">LEFT</div>
+			</div>
+			<div id="D" class="cubie center">
+				<div class="up face black">UP</div>
+				<div class="down face yellow">DOWN</div>
+				<div class="front face black">FRONT</div>
+				<div class="back face black">BACK</div>
+				<div class="right face black">RIGHT</div>
+				<div class="left face black">LEFT</div>
+			</div>
+			<div id="F" class="cubie center">
+				<div class="up face black">UP</div>
+				<div class="down face black">DOWN</div>
+				<div class="front face green">FRONT</div>
+				<div class="back face black">BACK</div>
+				<div class="right face black">RIGHT</div>
+				<div class="left face black">LEFT</div>
+			</div>
+			<div id="B" class="cubie center">
+				<div class="up face black">UP</div>
+				<div class="down face black">DOWN</div>
+				<div class="front face black">FRONT</div>
+				<div class="back face blue">BACK</div>
+				<div class="right face black">RIGHT</div>
+				<div class="left face black">LEFT</div>
+			</div>
+			<div id="R" class="cubie center">
+				<div class="up face black">UP</div>
+				<div class="down face black">DOWN</div>
+				<div class="front face black">FRONT</div>
+				<div class="back face black">BACK</div>
+				<div class="right face red">RIGHT</div>
+				<div class="left face black">LEFT</div>
+			</div>
+			<div id="L" class="cubie center">
+				<div class="up face black">UP</div>
+				<div class="down face black">DOWN</div>
+				<div class="front face black">FRONT</div>
+				<div class="back face black">BACK</div>
+				<div class="right face black">RIGHT</div>
+				<div class="left face orange">LEFT</div>
+			</div>
 
-  <a id="showControl">Show control</a>
+			<div id="UF" class="cubie edge">
+				<div class="up face white">UP</div>
+				<div class="down face black">DOWN</div>
+				<div class="front face green">FRONT</div>
+				<div class="back face black">BACK</div>
+				<div class="right face black">RIGHT</div>
+				<div class="left face black">LEFT</div>
+			</div>
+			<div id="UL" class="cubie edge">
+				<div class="up face white">UP</div>
+				<div class="down face black">DOWN</div>
+				<div class="front face black">FRONT</div>
+				<div class="back face black">BACK</div>
+				<div class="right face black">RIGHT</div>
+				<div class="left face orange">LEFT</div>
+			</div>
+			<div id="UB" class="cubie edge">
+				<div class="up face white">UP</div>
+				<div class="down face black">DOWN</div>
+				<div class="front face black">FRONT</div>
+				<div class="back face blue">BACK</div>
+				<div class="right face black">RIGHT</div>
+				<div class="left face black">LEFT</div>
+			</div>
+			<div id="UR" class="cubie edge">
+				<div class="up face white">UP</div>
+				<div class="down face black">DOWN</div>
+				<div class="front face black">FRONT</div>
+				<div class="back face black">BACK</div>
+				<div class="right face red">RIGHT</div>
+				<div class="left face black">LEFT</div>
+			</div>
 
-  <div id="control">
-    <label for="length">Cube length:</label>
-    <input type="range" name="length" min="50" max="500" value="100" id="length">
-    <span id="resultLength"></span>
-    <br>
+			<div id="DF" class="cubie edge">
+				<div class="up face black">UP</div>
+				<div class="down face yellow">DOWN</div>
+				<div class="front face green">FRONT</div>
+				<div class="back face black">BACK</div>
+				<div class="right face black">RIGHT</div>
+				<div class="left face black">LEFT</div>
+			</div>
+			<div id="DL" class="cubie edge">
+				<div class="up face black">UP</div>
+				<div class="down face yellow">DOWN</div>
+				<div class="front face black">FRONT</div>
+				<div class="back face black">BACK</div>
+				<div class="right face black">RIGHT</div>
+				<div class="left face orange">LEFT</div>
+			</div>
+			<div id="DB" class="cubie edge">
+				<div class="up face white">UP</div>
+				<div class="down face yellow">DOWN</div>
+				<div class="front face green">FRONT</div>
+				<div class="back face blue">BACK</div>
+				<div class="right face red">RIGHT</div>
+				<div class="left face orange">LEFT</div>
+			</div>
+			<div id="DR" class="cubie edge">
+				<div class="up face black">UP</div>
+				<div class="down face yellow">DOWN</div>
+				<div class="front face black">FRONT</div>
+				<div class="back face black">BACK</div>
+				<div class="right face red">RIGHT</div>
+				<div class="left face black">LEFT</div>
+			</div>
 
-    <label for="rotateY">Rotate X:</label>
-    <input type="range" name="rotateX" min="-360" max="360" value="0" id="rotateX">
-    <span id="resultRX"></span>
-    <br>
+			<div id="FR" class="cubie edge">
+				<div class="up face black">UP</div>
+				<div class="down face black">DOWN</div>
+				<div class="front face green">FRONT</div>
+				<div class="back face black">BACK</div>
+				<div class="right face red">RIGHT</div>
+				<div class="left face black">LEFT</div>
+			</div>
+			<div id="FL" class="cubie edge">
+				<div class="up face black">UP</div>
+				<div class="down face black">DOWN</div>
+				<div class="front face green">FRONT</div>
+				<div class="back face black">BACK</div>
+				<div class="right face black">RIGHT</div>
+				<div class="left face orange">LEFT</div>
+			</div>
 
-    <label for="rotateY">Rotate Y:</label>
-    <input type="range" name="rotateY" min="-360" max="360" value="0" id="rotateY">
-    <span id="resultRY"></span>
-    <br>
+			<div id="BR" class="cubie edge">
+				<div class="up face black">UP</div>
+				<div class="down face black">DOWN</div>
+				<div class="front face black">FRONT</div>
+				<div class="back face blue">BACK</div>
+				<div class="right face red">RIGHT</div>
+				<div class="left face black">LEFT</div>
+			</div>
+			<div id="BL" class="cubie edge">
+				<div class="up face black">UP</div>
+				<div class="down face black">DOWN</div>
+				<div class="front face black">FRONT</div>
+				<div class="back face blue">BACK</div>
+				<div class="right face black">RIGHT</div>
+				<div class="left face orange">LEFT</div>
+			</div>
 
-    <label for="rotateY">Rotate Z:</label>
-    <input type="range" name="rotateZ" min="-360" max="360" value="0" id="rotateZ">
-    <span id="resultRZ"></span>
-    <br>
+			<div id="UFR" class="cubie corner">
+				<div class="up face white">UP</div>
+				<div class="down face black">DOWN</div>
+				<div class="front face green">FRONT</div>
+				<div class="back face black">BACK</div>
+				<div class="right face red">RIGHT</div>
+				<div class="left face black">LEFT</div>
+			</div>
+			<div id="UFL" class="cubie corner">
+				<div class="up face white">UP</div>
+				<div class="down face black">DOWN</div>
+				<div class="front face green">FRONT</div>
+				<div class="back face black">BACK</div>
+				<div class="right face black">RIGHT</div>
+				<div class="left face orange">LEFT</div>
+			</div>
+			<div id="UBL" class="cubie corner">
+				<div class="up face white">UP</div>
+				<div class="down face black">DOWN</div>
+				<div class="front face black">FRONT</div>
+				<div class="back face blue">BACK</div>
+				<div class="right face black">RIGHT</div>
+				<div class="left face orange">LEFT</div>
+			</div>
+			<div id="UBR" class="cubie corner">
+				<div class="up face white">UP</div>
+				<div class="down face black">DOWN</div>
+				<div class="front face black">FRONT</div>
+				<div class="back face blue">BACK</div>
+				<div class="right face red">RIGHT</div>
+				<div class="left face black">LEFT</div>
+			</div>
 
-    <label for="translateX">Translate X:</label>
-    <input type="range" name="translateX" min="-500" max="500" value="0" id="translateX">
-    <span id="resultTX"></span>
-    <br>
-
-    <label for="translateY">Translate Y:</label>
-    <input type="range" name="translateY" min="-500" max="500" value="0" id="translateY">
-    <span id="resultTY"></span>
-    <br>
-
-    <label for="translateZ">Translate Z:</label>
-    <input type="range" name="translateZ" min="-500" max="500" value="0" id="translateZ">
-    <span id="resultTZ"></span>
-    <br>
-
-    <label for="perspective">Perspective:</label>
-    <input type="range" name="perspective" min="0" max="2000" value="1000" id="perspective">
-    <span id="resultP"></span>
-    <br>
-  </div>
-
-  <script>
-    document.querySelector("#showControl").addEventListener("click", () => {
-      if (document.querySelector("#control").style.left == "-90%")
-        document.querySelector("#control").style.left = "0%";
-      else 
-        document.querySelector("#control").style.left = "-90%";
-    })
-    
-    loop = () => {
-      let cL = document.querySelector("#length");
-      let rX = document.querySelector("#rotateX");
-      let rY = document.querySelector("#rotateY");
-      let rZ = document.querySelector("#rotateZ");
-      let tX = document.querySelector("#translateX");
-      let tY = document.querySelector("#translateY");
-      let tZ = document.querySelector("#translateZ");
-      let p = document.querySelector("#perspective");
-
-      document.querySelector("#resultLength").innerHTML = cL.value;
-      document.querySelector("#resultRX").innerHTML = rX.value;
-      document.querySelector("#resultRY").innerHTML = rY.value;
-      document.querySelector("#resultRZ").innerHTML = rZ.value;
-      document.querySelector("#resultTX").innerHTML = tX.value;
-      document.querySelector("#resultTY").innerHTML = tY.value;
-      document.querySelector("#resultTZ").innerHTML = tZ.value;
-      document.querySelector("#resultP").innerHTML = p.value;
-
-      document.querySelector(".rubik-cube > .core").style.transform = `rotateX(${rX.value}deg) rotateY(${rY.value}deg) rotateZ(${rZ.value}deg) translateX(${tX.value}px) translateY(${tY.value}px) translateZ(${tZ.value}px)`;
-      document.querySelector(".rubik-cube").style.perspective = `${p.value}px`;
-      document.querySelector(':root').style.setProperty("--length", `${cL.value}px`);
-
-      requestAnimationFrame(loop)
-    }
-
-    loop();
-  </script>
+			<div id="DFR" class="cubie corner">
+				<div class="up face black">UP</div>
+				<div class="down face yellow">DOWN</div>
+				<div class="front face green">FRONT</div>
+				<div class="back face black">BACK</div>
+				<div class="right face red">RIGHT</div>
+				<div class="left face black">LEFT</div>
+			</div>
+			<div id="DFL" class="cubie corner">
+				<div class="up face black">UP</div>
+				<div class="down face yellow">DOWN</div>
+				<div class="front face green">FRONT</div>
+				<div class="back face black">BACK</div>
+				<div class="right face black">RIGHT</div>
+				<div class="left face orange">LEFT</div>
+			</div>
+			<div id="DBL" class="cubie corner">
+				<div class="up face black">UP</div>
+				<div class="down face yellow">DOWN</div>
+				<div class="front face black">FRONT</div>
+				<div class="back face blue">BACK</div>
+				<div class="right face black">RIGHT</div>
+				<div class="left face orange">LEFT</div>
+			</div>
+			<div id="DBR" class="cubie corner">
+				<div class="up face black">UP</div>
+				<div class="down face yellow">DOWN</div>
+				<div class="front face black">FRONT</div>
+				<div class="back face blue">BACK</div>
+				<div class="right face red">RIGHT</div>
+				<div class="left face black">LEFT</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

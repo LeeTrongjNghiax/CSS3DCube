@@ -1,104 +1,212 @@
 :root {
-  --length: 100px;
+	--length: 40vh;
+	--border-length: 0.9vh;
+	--length-ratio: 3;
 }
 
 * {
-  padding: 0;
-  margin: 0;
-  font-family: monospace;
-  background-color: black;
-  color: white;
+  	padding: 0;
+	margin: 0;
+	font-family: monospace;
+
+	background-color: rgba(05, 05, 05, 05);
+	font-size: calc( var(--length) / 16 );
 }
 
-#showControl {
-  position: absolute;
-  top: 0%;
-  left: 0%;
-  border: 1px solid white;
-  background-color: green;
-  padding: 10px;
+#container {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 80vh;
+	height: 80vh;
+	transform: translate(-50%, -50%);
+	
+	background-color: rgba(25, 25, 25, 05);
+	box-shadow: 1vh 1vh 3vh rgba(150, 150, 150, 0.5);
 }
 
-#control {
-  position: absolute; 
-  width: 90%;
-  top: 50%;
-  left: -90%;
-  transition: left 1s;
+#rubik-cube {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: var(--length);
+	height: var(--length);
+	transform-style: preserve-3d;
+	display: flex;
+  	align-items: center;
+  	justify-content: center;
+
+	perspective: 2000vh;
+	background-color: rgba(0, 0, 200, 0);
+	transform: translate(-50%, -50%) rotateY(43deg) rotateX(334deg);
 }
 
-.rubik-cube {
-  margin-top: 50px;
-  margin-bottom: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+#rubik-cube .cubie {
+	width: calc( var(--length) / var(--length-ratio) - var(--border-length) );
+  	height: calc( var(--length) / var(--length-ratio) - var(--border-length) );
+  	transform-style: preserve-3d;
+	position: absolute;
 
-.rubik-cube > .core {
-  width: var(--length);
-  height: var(--length);
-  transform-style: preserve-3d;
-  position: relative;
-  animation: loop 10s linear infinite;
-  transform-origin: 50% 50%;
-  background-color: none;
+	background-color: rgba(0, 0, 0, 0);
 }
 
 .face {
-  width: var(--length);
-  height: var(--length);
+	width: calc( var(--length) / var(--length-ratio) - var(--border-length) );
+	height: calc( var(--length) / var(--length-ratio) - var(--border-length) );
+	font-weight: bolder;
+	position: absolute;
+	display: flex;
+  	align-items: center;
+  	justify-content: center;
 
-  border: 2px solid white;
-  font-size: 20px;
-  font-weight: bolder;
-
-  position: absolute;
-  opacity: 0.5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	border: var(--border-length) solid black;
+	opacity: 1;
 }
 
-#up {
-  background-color: yellow;
-  transform: rotateX(90deg) translateZ(calc(var(--length) / 2));
+.up {
+	transform: rotateX(90deg) translateZ(calc(var(--length) / var(--length-ratio) * 1 / 2));
+}
+.down {
+	transform: rotateX(-90deg) translateZ(calc(var(--length) / var(--length-ratio) * 1 / 2));
+}
+.front {
+	transform: translateZ(calc(var(--length) / var(--length-ratio) * 1 / 2));
+}
+.back {
+	transform: rotateY(180deg) translateZ(calc(var(--length) / var(--length-ratio) * 1 / 2));
+}
+.right {
+	transform: rotateY(90deg) translateZ(calc(var(--length) / var(--length-ratio) * 1 / 2));
+}
+.left {
+	transform: rotateY(-90deg) translateZ(calc(var(--length) / var(--length-ratio) * 1 / 2));
 }
 
-#down {
-  background-color: white;
-  transform: rotateX(-90deg) translateZ(calc(var(--length) / 2));
+.white { background-color: white; }
+.yellow { background-color: yellow; }
+.green { background-color: green; }
+.blue { background-color: blue; }
+.red { background-color: red; }
+.orange { background-color: orange; }
+.black { background-color: black; }
+
+#U { transform: translateY( calc( var(--length) / var(--length-ratio) * -1 ) ); }
+#D { transform: translateY( calc( var(--length) / var(--length-ratio) * 1 ) ); }
+#F { transform: translateZ( calc( var(--length) / var(--length-ratio) * 1 ) ); }
+#B { transform: translateZ( calc( var(--length) / var(--length-ratio) * -1 ) ); }
+#R { transform: translateX( calc( var(--length) / var(--length-ratio) * 1 ) ); }
+#L { transform: translateX( calc( var(--length) / var(--length-ratio) * -1 ) ); }
+
+#UF {
+	transform: 
+		translateY( calc( var(--length) / var(--length-ratio) * -1 ) ) 
+		translateZ( calc( var(--length) / var(--length-ratio) * 1 ) );
+}
+#UL {
+	transform: 
+		translateY( calc( var(--length) / var(--length-ratio) * -1 ) ) 
+		translateX( calc( var(--length) / var(--length-ratio) * -1 ) );
+}
+#UB {
+	transform: 
+		translateY( calc( var(--length) / var(--length-ratio) * -1 ) ) 
+		translateZ( calc( var(--length) / var(--length-ratio) * -1 ) );
+}
+#UR {
+	transform: 
+		translateY( calc( var(--length) / var(--length-ratio) * -1 ) ) 
+		translateX( calc( var(--length) / var(--length-ratio) * 1 ) );
 }
 
-#front {
-  background-color: green;
-  transform: translateZ(calc(var(--length) / 2));
+#DF {
+	transform: 
+		translateY( calc( var(--length) / var(--length-ratio) * 1 ) ) 
+		translateZ( calc( var(--length) / var(--length-ratio) * 1 ) );
+}
+#DL {
+	transform: 
+		translateY( calc( var(--length) / var(--length-ratio) * 1 ) ) 
+		translateX( calc( var(--length) / var(--length-ratio) * -1 ) );
+}
+#DB {
+	transform: 
+		translateY( calc( var(--length) / var(--length-ratio) * 1 ) ) 
+		translateZ( calc( var(--length) / var(--length-ratio) * -1 ) );
+}
+#DR {
+	transform: 
+		translateY( calc( var(--length) / var(--length-ratio) * 1 ) ) 
+		translateX( calc( var(--length) / var(--length-ratio) * 1 ) );
 }
 
-#back {
-  background-color: blue;
-  transform: rotateY(180deg) translateZ(calc(var(--length) / 2));
+#FR {
+	transform: 
+		translateZ( calc( var(--length) / var(--length-ratio) * 1 ) ) 
+		translateX( calc( var(--length) / var(--length-ratio) * 1 ) );
+}
+#FL {
+	transform: 
+		translateZ( calc( var(--length) / var(--length-ratio) * 1 ) ) 
+		translateX( calc( var(--length) / var(--length-ratio) * -1 ) );
 }
 
-#right {
-  background-color: red;
-  transform: rotateY(90deg) translateZ(calc(var(--length) / 2));
+#BR {
+	transform: 
+		translateZ( calc( var(--length) / var(--length-ratio) * -1 ) ) 
+		translateX( calc( var(--length) / var(--length-ratio) * 1 ) );
+}
+#BL {
+	transform: 
+		translateZ( calc( var(--length) / var(--length-ratio) * -1 ) ) 
+		translateX( calc( var(--length) / var(--length-ratio) * -1 ) );
 }
 
-#left {
-  background-color: orange;
-  transform: rotateY(-90deg) translateZ(calc(var(--length) / 2));
+#UFR {
+	transform: 
+		translateY( calc( var(--length) / var(--length-ratio) * -1 ) ) 
+		translateZ( calc( var(--length) / var(--length-ratio) * 1 ) ) 
+		translateX( calc( var(--length) / var(--length-ratio) * 1 ) );
+}
+#UFL {
+	transform: 
+		translateY( calc( var(--length) / var(--length-ratio) * -1 ) ) 
+		translateZ( calc( var(--length) / var(--length-ratio) * 1 ) ) 
+		translateX( calc( var(--length) / var(--length-ratio) * -1 ) );
+}
+#UBR {
+	transform: 
+		translateY( calc( var(--length) / var(--length-ratio) * -1 ) ) 
+		translateZ( calc( var(--length) / var(--length-ratio) * -1 ) ) 
+		translateX( calc( var(--length) / var(--length-ratio) * 1 ) );
+}
+#UBL {
+	transform: 
+		translateY( calc( var(--length) / var(--length-ratio) * -1 ) ) 
+		translateZ( calc( var(--length) / var(--length-ratio) * -1 ) ) 
+		translateX( calc( var(--length) / var(--length-ratio) * -1 ) );
 }
 
-input[type=range] {
-  width: 80%;
+#DFR {
+	transform: 
+		translateY( calc( var(--length) / var(--length-ratio) * 1 ) ) 
+		translateZ( calc( var(--length) / var(--length-ratio) * 1 ) ) 
+		translateX( calc( var(--length) / var(--length-ratio) * 1 ) );
 }
-
-/* @keyframes loop {
-  from {
-    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
-  }
-  to {
-    transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
-  }
-} */
+#DFL {
+	transform: 
+		translateY( calc( var(--length) / var(--length-ratio) * 1 ) ) 
+		translateZ( calc( var(--length) / var(--length-ratio) * 1 ) ) 
+		translateX( calc( var(--length) / var(--length-ratio) * -1 ) );
+}
+#DBR {
+	transform: 
+		translateY( calc( var(--length) / var(--length-ratio) * 1 ) ) 
+		translateZ( calc( var(--length) / var(--length-ratio) * -1 ) ) 
+		translateX( calc( var(--length) / var(--length-ratio) * 1 ) );
+}
+#DBL {
+	transform: 
+		translateY( calc( var(--length) / var(--length-ratio) * 1 ) ) 
+		translateZ( calc( var(--length) / var(--length-ratio) * -1 ) ) 
+		translateX( calc( var(--length) / var(--length-ratio) * -1 ) );
+}
