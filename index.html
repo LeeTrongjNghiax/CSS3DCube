@@ -35,13 +35,15 @@
 				<div class="right face black">RIGHT</div>
 				<div class="left face black">LEFT</div>
 			</div>
-			<div id="F" class="cubie center">
-				<div class="up face black">UP</div>
-				<div class="down face black">DOWN</div>
-				<div class="front face green">FRONT</div>
-				<div class="back face black">BACK</div>
-				<div class="right face black">RIGHT</div>
-				<div class="left face black">LEFT</div>
+			<div class="cubie-container" id="F-container">
+				<div id="F" class="cubie center">
+					<div class="up face black">UP</div>
+					<div class="down face black">DOWN</div>
+					<div class="front face green">FRONT</div>
+					<div class="back face black">BACK</div>
+					<div class="right face black">RIGHT</div>
+					<div class="left face black">LEFT</div>
+				</div>
 			</div>
 			<div id="B" class="cubie center">
 				<div class="up face black">UP</div>
@@ -68,13 +70,15 @@
 				<div class="left face orange">LEFT</div>
 			</div>
 
-			<div id="UF" class="cubie edge">
-				<div class="up face white">UP</div>
-				<div class="down face black">DOWN</div>
-				<div class="front face green">FRONT</div>
-				<div class="back face black">BACK</div>
-				<div class="right face black">RIGHT</div>
-				<div class="left face black">LEFT</div>
+			<div class="cubie-container" id="UF-container">
+				<div id="UF" class="cubie edge">
+					<div class="up face white">UP</div>
+					<div class="down face black">DOWN</div>
+					<div class="front face green">FRONT</div>
+					<div class="back face black">BACK</div>
+					<div class="right face black">RIGHT</div>
+					<div class="left face black">LEFT</div>
+				</div>
 			</div>
 			<div id="UL" class="cubie edge">
 				<div class="up face white">UP</div>
@@ -101,13 +105,15 @@
 				<div class="left face black">LEFT</div>
 			</div>
 
-			<div id="DF" class="cubie edge">
-				<div class="up face black">UP</div>
-				<div class="down face yellow">DOWN</div>
-				<div class="front face green">FRONT</div>
-				<div class="back face black">BACK</div>
-				<div class="right face black">RIGHT</div>
-				<div class="left face black">LEFT</div>
+			<div class="cubie-container" id="DF-container">
+				<div id="DF" class="cubie edge">
+					<div class="up face black">UP</div>
+					<div class="down face yellow">DOWN</div>
+					<div class="front face green">FRONT</div>
+					<div class="back face black">BACK</div>
+					<div class="right face black">RIGHT</div>
+					<div class="left face black">LEFT</div>
+				</div>
 			</div>
 			<div id="DL" class="cubie edge">
 				<div class="up face black">UP</div>
@@ -134,21 +140,25 @@
 				<div class="left face black">LEFT</div>
 			</div>
 
-			<div id="FR" class="cubie edge">
-				<div class="up face black">UP</div>
-				<div class="down face black">DOWN</div>
-				<div class="front face green">FRONT</div>
-				<div class="back face black">BACK</div>
-				<div class="right face red">RIGHT</div>
-				<div class="left face black">LEFT</div>
+			<div class="cubie-container" id="FR-container">
+				<div id="FR" class="cubie edge">
+					<div class="up face black">UP</div>
+					<div class="down face black">DOWN</div>
+					<div class="front face green">FRONT</div>
+					<div class="back face black">BACK</div>
+					<div class="right face red">RIGHT</div>
+					<div class="left face black">LEFT</div>
+				</div>
 			</div>
-			<div id="FL" class="cubie edge">
-				<div class="up face black">UP</div>
-				<div class="down face black">DOWN</div>
-				<div class="front face green">FRONT</div>
-				<div class="back face black">BACK</div>
-				<div class="right face black">RIGHT</div>
-				<div class="left face orange">LEFT</div>
+			<div class="cubie-container" id="FL-container">
+				<div id="FL" class="cubie edge">
+					<div class="up face black">UP</div>
+					<div class="down face black">DOWN</div>
+					<div class="front face green">FRONT</div>
+					<div class="back face black">BACK</div>
+					<div class="right face black">RIGHT</div>
+					<div class="left face orange">LEFT</div>
+				</div>
 			</div>
 
 			<div id="BR" class="cubie edge">
@@ -245,18 +255,21 @@
 	</div>
 
 	<script>
-		window.onload = () => {
-			document.querySelector("#UF.cubie").style.transform += "translateY( calc( var(--length) / var(--length-ratio) * -1 ) ) translateZ( calc( var(--length) / var(--length-ratio) * 1 ) );";
-		}
-		document.querySelector("#control .U").addEventListener("click", (e) => {
-			document.querySelector("#UF.cubie").style.transformOrigin = "center center";
-			document.querySelector("#UF.cubie").style.transition = "all 2s";
+		document.querySelector("#control .F").addEventListener("click", (e) => {
+			document.querySelector("#F.cubie").style.transformOrigin = "center center";
+			document.querySelector("#F.cubie").style.transform += "rotateZ(90deg)";
 
-			console.log( document.querySelector("#U.cubie") );
-			console.log( document.querySelector("#U.cubie").style );
-			
-			// document.querySelector("#U.cubie").style.top = "0";
-			document.querySelector("#UF.cubie").style.transform += "rotateY(90deg)";
+			document.querySelector("#UF.cubie").style.transformOrigin = "center 150%";
+			document.querySelector("#UF.cubie").style.transform += "rotateZ(90deg)";
+
+			document.querySelector("#DF.cubie").style.transformOrigin = "center -50%";
+			document.querySelector("#DF.cubie").style.transform += "rotateZ(90deg)";
+
+			document.querySelector("#FR.cubie").style.transformOrigin = "-50% 50%";
+			document.querySelector("#FR.cubie").style.transform += "rotateZ(90deg)";
+
+			document.querySelector("#FL.cubie").style.transformOrigin = "150% 50%";
+			document.querySelector("#FL.cubie").style.transform += "rotateZ(90deg)";
 		});
 	</script>
 </body>

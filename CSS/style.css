@@ -27,12 +27,8 @@ body {
 }
 
 #container {
-	/* position: absolute;
-	top: 50%;
-	left: 50%; */
 	width: 80vh;
 	height: 80vh;
-	/* transform: translate(-50%, -50%); */
 	
 	background-color: rgba(25, 25, 25, 05);
 	box-shadow: 1vh 1vh 3vh rgba(150, 150, 150, 0.5);
@@ -59,8 +55,16 @@ body {
 	height: calc( var(--length) / var(--length-ratio) );
 	transform-style: preserve-3d;
 	position: absolute;
+	transition: all 2s;
 
 	background-color: rgba(200, 0, 0, 0.1);
+}
+
+.cubie-container {
+	position: absolute;
+	width: calc( var(--length) / var(--length-ratio) * 1 );
+	height: calc( var(--length) / var(--length-ratio) * 1 );
+	transform-style: preserve-3d;
 }
 
 .face {
@@ -105,19 +109,16 @@ body {
 .orange { background-color: orange; }
 .black { background-color: black; }
 
-#U { 
-	/* transform: translateY( calc( var(--length) / var(--length-ratio) * -1 ) );  */
-	top: 0;
-}
+#U { transform: translateY( calc( var(--length) / var(--length-ratio) * -1 ) ); }
 #D { transform: translateY( calc( var(--length) / var(--length-ratio) * 1 ) ); }
-#F { transform: translateZ( calc( var(--length) / var(--length-ratio) * 1 ) ); }
+#F-container { 
+	transform: translateZ( calc( var(--length) / var(--length-ratio) * 1 ) ); 
+} 
 #B { transform: translateZ( calc( var(--length) / var(--length-ratio) * -1 ) ); }
 #R { transform: translateX( calc( var(--length) / var(--length-ratio) * 1 ) ); }
 #L { transform: translateX( calc( var(--length) / var(--length-ratio) * -1 ) ); }
 
-#UF {
-	/* bottom: calc( var(--length) - var(--length) / 3 ); */
-	/* transform: translateZ( calc( var(--length) / var(--length-ratio) * 1 ) ); */
+#UF-container {
 	transform: 
 		translateY( calc( var(--length) / var(--length-ratio) * -1 ) ) 
 		translateZ( calc( var(--length) / var(--length-ratio) * 1 ) );
@@ -138,7 +139,7 @@ body {
 		translateX( calc( var(--length) / var(--length-ratio) * 1 ) );
 }
 
-#DF {
+#DF-container {
 	transform: 
 		translateY( calc( var(--length) / var(--length-ratio) * 1 ) ) 
 		translateZ( calc( var(--length) / var(--length-ratio) * 1 ) );
@@ -159,12 +160,12 @@ body {
 		translateX( calc( var(--length) / var(--length-ratio) * 1 ) );
 }
 
-#FR {
+#FR-container{
 	transform: 
 		translateZ( calc( var(--length) / var(--length-ratio) * 1 ) ) 
 		translateX( calc( var(--length) / var(--length-ratio) * 1 ) );
 }
-#FL {
+#FL-container {
 	transform: 
 		translateZ( calc( var(--length) / var(--length-ratio) * 1 ) ) 
 		translateX( calc( var(--length) / var(--length-ratio) * -1 ) );
