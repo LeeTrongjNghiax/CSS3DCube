@@ -235,5 +235,29 @@
 			</div>
 		</div>
 	</div>
+	<div id="control">
+		<button class="U">UP</button>
+		<button class="D">DOWN</button>
+		<button class="F">FRONT</button>
+		<button class="B">BACK</button>
+		<button class="R">RIGHT</button>
+		<button class="L">LEFT</button>
+	</div>
+
+	<script>
+		window.onload = () => {
+			document.querySelector("#UF.cubie").style.transform += "translateY( calc( var(--length) / var(--length-ratio) * -1 ) ) translateZ( calc( var(--length) / var(--length-ratio) * 1 ) );";
+		}
+		document.querySelector("#control .U").addEventListener("click", (e) => {
+			document.querySelector("#UF.cubie").style.transformOrigin = "center center";
+			document.querySelector("#UF.cubie").style.transition = "all 2s";
+
+			console.log( document.querySelector("#U.cubie") );
+			console.log( document.querySelector("#U.cubie").style );
+			
+			// document.querySelector("#U.cubie").style.top = "0";
+			document.querySelector("#UF.cubie").style.transform += "rotateY(90deg)";
+		});
+	</script>
 </body>
 </html>
