@@ -6,7 +6,250 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>CSS 3D Rubik's Cube</title>
 
-	<link rel="stylesheet" href="CSS/style.css">
+	<style>
+        :root {
+	--length: 35vh;
+	--border-length: 1vh;
+	--length-ratio: 3;
+}
+
+* {
+	padding: 0;
+	margin: 0;
+	font-family: monospace;
+	box-sizing: border-box;
+
+	background-color: rgba(05, 05, 05, 05);
+	color: rgba(255, 255, 255, 1);
+	font-size: calc( var(--length) / 10 );
+}
+
+body {
+	width: 100vw;
+	height: 100vh;
+	overflow-x: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	gap: 5vh;
+}
+
+#container {
+	width: 80vh;
+	height: 80vh;
+	
+	background-color: rgba(25, 25, 25, 05);
+	box-shadow: 1vh 1vh 3vh rgba(150, 150, 150, 0.5);
+}
+
+#rubik-cube {
+	position: relative;
+	top: 50%;
+	left: 50%;
+	width: var(--length);
+	height: var(--length);
+	transform-style: preserve-3d;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	perspective: 9000vh;
+	background-color: rgba(0, 0, 200, 0);
+    /* transform: translate(-50%, -50%) rotateY(313deg) rotateX(343deg) rotateZ(18deg); */
+}
+
+#rubik-cube .cubie {
+	width: calc( var(--length) / var(--length-ratio) );
+	height: calc( var(--length) / var(--length-ratio) );
+	transform-style: preserve-3d;
+	position: absolute;
+	transition: transform 0.5s;
+
+    background-color: rgba(200, 0, 0, 0);
+}
+
+.cubie-container {
+	position: absolute;
+	width: calc( var(--length) / var(--length-ratio) * 1 );
+	height: calc( var(--length) / var(--length-ratio) * 1 );
+	transform-style: preserve-3d;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.face {
+	width: calc( var(--length) / var(--length-ratio) );
+	height: calc( var(--length) / var(--length-ratio) );
+	transform-style: preserve-3d;
+	font-weight: bolder;
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 0;
+
+	border: var(--border-length) solid black;
+	opacity: 0.75;
+}
+
+.up {
+	transform: rotateX(90deg) translateZ(calc(var(--length) / var(--length-ratio) * 1 / 2));
+}
+.down {
+	transform: rotateX(-90deg) translateZ(calc(var(--length) / var(--length-ratio) * 1 / 2));
+}
+.front {
+	transform: translateZ(calc(var(--length) / var(--length-ratio) * 1 / 2));
+}
+.back {
+	transform: rotateY(180deg) translateZ(calc(var(--length) / var(--length-ratio) * 1 / 2));
+}
+.right {
+	transform: rotateY(90deg) translateZ(calc(var(--length) / var(--length-ratio) * 1 / 2));
+}
+.left {
+	transform: rotateY(-90deg) translateZ(calc(var(--length) / var(--length-ratio) * 1 / 2));
+}
+
+.white { background-color: white; }
+.yellow { background-color: yellow; }
+.green { background-color: green; }
+.blue { background-color: blue; }
+.red { background-color: red; }
+.orange { background-color: orange; }
+.black { background-color: black; }
+
+#U-container { transform: translateY( calc( var(--length) / var(--length-ratio) * -1 ) ); }
+#D-container { transform: translateY( calc( var(--length) / var(--length-ratio) * 1 ) ); }
+#F-container { transform: translateZ( calc( var(--length) / var(--length-ratio) * 1 ) ); } 
+#B-container { transform: translateZ( calc( var(--length) / var(--length-ratio) * -1 ) ); }
+#R-container { transform: translateX( calc( var(--length) / var(--length-ratio) * 1 ) ); }
+#L-container { transform: translateX( calc( var(--length) / var(--length-ratio) * -1 ) ); }
+
+#UF-container {
+	transform: 
+		translateY( calc( var(--length) / var(--length-ratio) * -1 ) ) 
+		translateZ( calc( var(--length) / var(--length-ratio) * 1 ) );
+}
+#UL-container {
+	transform: 
+		translateY( calc( var(--length) / var(--length-ratio) * -1 ) ) 
+		translateX( calc( var(--length) / var(--length-ratio) * -1 ) );
+}
+#UB-container {
+	transform: 
+		translateY( calc( var(--length) / var(--length-ratio) * -1 ) ) 
+		translateZ( calc( var(--length) / var(--length-ratio) * -1 ) );
+}
+#UR-container {
+	transform: 
+		translateY( calc( var(--length) / var(--length-ratio) * -1 ) ) 
+		translateX( calc( var(--length) / var(--length-ratio) * 1 ) );
+}
+
+#DF-container {
+	transform: 
+		translateY( calc( var(--length) / var(--length-ratio) * 1 ) ) 
+		translateZ( calc( var(--length) / var(--length-ratio) * 1 ) );
+}
+#DL-container {
+	transform: 
+		translateY( calc( var(--length) / var(--length-ratio) * 1 ) ) 
+		translateX( calc( var(--length) / var(--length-ratio) * -1 ) );
+}
+#DB-container {
+	transform: 
+		translateY( calc( var(--length) / var(--length-ratio) * 1 ) ) 
+		translateZ( calc( var(--length) / var(--length-ratio) * -1 ) );
+}
+#DR-container {
+	transform: 
+		translateY( calc( var(--length) / var(--length-ratio) * 1 ) ) 
+		translateX( calc( var(--length) / var(--length-ratio) * 1 ) );
+}
+
+#FR-container{
+	transform: 
+		translateZ( calc( var(--length) / var(--length-ratio) * 1 ) ) 
+		translateX( calc( var(--length) / var(--length-ratio) * 1 ) );
+}
+#FL-container {
+	transform: 
+		translateZ( calc( var(--length) / var(--length-ratio) * 1 ) ) 
+		translateX( calc( var(--length) / var(--length-ratio) * -1 ) );
+}
+
+#BR-container {
+	transform: 
+		translateZ( calc( var(--length) / var(--length-ratio) * -1 ) ) 
+		translateX( calc( var(--length) / var(--length-ratio) * 1 ) );
+}
+#BL-container {
+	transform: 
+		translateZ( calc( var(--length) / var(--length-ratio) * -1 ) ) 
+		translateX( calc( var(--length) / var(--length-ratio) * -1 ) );
+}
+
+#UFR-container {
+	transform: 
+		translateY( calc( var(--length) / var(--length-ratio) * -1 ) ) 
+		translateZ( calc( var(--length) / var(--length-ratio) * 1 ) ) 
+		translateX( calc( var(--length) / var(--length-ratio) * 1 ) );
+}
+#UFL-container {
+	transform: 
+		translateY( calc( var(--length) / var(--length-ratio) * -1 ) ) 
+		translateZ( calc( var(--length) / var(--length-ratio) * 1 ) ) 
+		translateX( calc( var(--length) / var(--length-ratio) * -1 ) );
+}
+#UBR-container {
+	transform: 
+		translateY( calc( var(--length) / var(--length-ratio) * -1 ) ) 
+		translateZ( calc( var(--length) / var(--length-ratio) * -1 ) ) 
+		translateX( calc( var(--length) / var(--length-ratio) * 1 ) );
+}
+#UBL-container {
+	transform: 
+		translateY( calc( var(--length) / var(--length-ratio) * -1 ) ) 
+		translateZ( calc( var(--length) / var(--length-ratio) * -1 ) ) 
+		translateX( calc( var(--length) / var(--length-ratio) * -1 ) );
+}
+
+#DFR-container {
+	transform: 
+		translateY( calc( var(--length) / var(--length-ratio) * 1 ) ) 
+		translateZ( calc( var(--length) / var(--length-ratio) * 1 ) ) 
+		translateX( calc( var(--length) / var(--length-ratio) * 1 ) );
+}
+#DFL-container {
+	transform: 
+		translateY( calc( var(--length) / var(--length-ratio) * 1 ) ) 
+		translateZ( calc( var(--length) / var(--length-ratio) * 1 ) ) 
+		translateX( calc( var(--length) / var(--length-ratio) * -1 ) );
+}
+#DBR-container {
+	transform: 
+		translateY( calc( var(--length) / var(--length-ratio) * 1 ) ) 
+		translateZ( calc( var(--length) / var(--length-ratio) * -1 ) ) 
+		translateX( calc( var(--length) / var(--length-ratio) * 1 ) );
+}
+#DBL-container {
+	transform: 
+		translateY( calc( var(--length) / var(--length-ratio) * 1 ) ) 
+		translateZ( calc( var(--length) / var(--length-ratio) * -1 ) ) 
+		translateX( calc( var(--length) / var(--length-ratio) * -1 ) );
+}
+
+#control #move {
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+}
+
+#control button {
+	padding: 2vh;
+}
+    </style>
 </head>
 <body>
   <div id="container">
@@ -87,7 +330,7 @@
 			</div>
 
 			<div class="cubie-container" id="UF-container">
-				<div id="UF" class="cubie edge helper">
+				<div id="UF" class="cubie edge UF">
 					<div class="up face white">UP</div>
 					<div class="down face black">DOWN</div>
 					<div class="front face green">FRONT</div>
@@ -320,17 +563,17 @@
 		<div id="rotate">
 			<form action="">
 				<label for="rotate-x">X</label>
-				<input type="range" name="rotate-x" id="rotate-x" min="-360" step="1" max="360" value="341">
+				<input type="range" name="rotate-x" id="rotate-x" min="-360" step="1" max="360" value="328">
 				<span id="x-value"></span>
 			</form>
 			<form action="">
 				<label for="rotate-x">Y</label>
-				<input type="range" name="rotate-y" id="rotate-y" min="-360" step="1" max="360" value="315">
+				<input type="range" name="rotate-y" id="rotate-y" min="-360" step="1" max="360" value="303">
 				<span id="y-value"></span>
 			</form>
 			<form action="">
 				<label for="rotate-x">Z</label>
-				<input type="range" name="rotate-z" id="rotate-z" min="-360" step="1" max="360" value="1">
+				<input type="range" name="rotate-z" id="rotate-z" min="-360" step="1" max="360" value="-3">
 				<span id="z-value"></span>
 			</form>
 			<form action="">
@@ -347,6 +590,8 @@
 			'core', 'F', 'FL', 'L', 'BL', 'B', 'BR', 'R', 'FR', 
 			'D', 'DF', 'DFL', 'DL', 'DBL', 'DB', 'DBR', 'DR', 'DFR', 
 		];
+
+		console.table(RUBIK_CUBE);
 		
 		loop = () => {
 			document.querySelector("#x-value").innerHTML = document.querySelector("form #rotate-x").value;
@@ -367,304 +612,95 @@
 		loop();
 
 		seriesSwap = (arr, positions, count = 1) => {
-			for (let c = 0; c < count; c++) {
-				let temp = arr[ positions[0] ];
+      for (let c = 0; c < count; c++) {
+        let temp = arr[ positions[0] ];
 
-				for (let i = 0; i < positions.length - 1; i++)
+        for (let i = 0; i < positions.length - 1; i++) {
 					arr[ positions[i] ] = arr[ positions[i + 1] ];
-				
-				arr[ positions[ positions.length - 1 ] ] = temp;
-			}
+				}
+        
+        arr[ positions[ positions.length - 1 ] ] = temp;
+      }
 
 			return arr;
-    	}
+    }
 
 		document.querySelector("#control .U").addEventListener("click", (e) => {
 			// U
-			// if ( document.querySelector(`#${RUBIK_CUBE[0]}`).style.transform == `rotateY(-90deg) rotateY(-90deg) rotateY(-90deg) rotateY(-90deg)` ) {
-			// 	document.querySelector(`#${RUBIK_CUBE[0]}`).style.transform = ``;
-			// }
 			document.querySelector(`#${RUBIK_CUBE[0]}`).style.transformOrigin = "50% -50%";
 			document.querySelector(`#${RUBIK_CUBE[0]}`).style.transform += "rotateY(-90deg)";
 			
 			// UF
-			switch (RUBIK_CUBE[1]) {
-				case "UR":
-					document.querySelector(`#${RUBIK_CUBE[1]}`).style.transformOrigin = "-50% -50%";
-					break;
-				case "UB":
-					document.querySelector(`#${RUBIK_CUBE[1]}`).style.transformOrigin = "50% -50% calc( var(--length) / 3)";
-					break;
-				case "UL":
-					document.querySelector(`#${RUBIK_CUBE[1]}`).style.transformOrigin = "150% -50%";
-					break;
-				default:
-					document.querySelector(`#${RUBIK_CUBE[1]}`).style.transformOrigin = "50% -50% calc( var(--length) / -3)";
-			}
+			document.querySelector(`#${RUBIK_CUBE[1]}`).style.transformOrigin = "50% -50% calc( var(--length) / -3)";
 			document.querySelector(`#${RUBIK_CUBE[1]}`).style.transform += "rotateY(-90deg)";
 
 			// UL
-			switch (RUBIK_CUBE[3]) {
-				case "UF":
-					document.querySelector(`#${RUBIK_CUBE[3]}`).style.transformOrigin = "50% -50% calc( var(--length) / -3)";
-					break;
-				case "UR":
-					document.querySelector(`#${RUBIK_CUBE[3]}`).style.transformOrigin = "-50% -50%";
-					break;
-				case "UB":
-					document.querySelector(`#${RUBIK_CUBE[3]}`).style.transformOrigin = "50% -50% calc( var(--length) / 3)";
-					break;
-				default:
-					document.querySelector(`#${RUBIK_CUBE[3]}`).style.transformOrigin = "150% -50%";
-			}
+			document.querySelector(`#${RUBIK_CUBE[3]}`).style.transformOrigin = "150% -50%";
 			document.querySelector(`#${RUBIK_CUBE[3]}`).style.transform += "rotateY(-90deg)";
 
 			// UB
-			switch (RUBIK_CUBE[5]) {
-				case "UL":
-					document.querySelector(`#${RUBIK_CUBE[5]}`).style.transformOrigin = "150% -50%";
-					break;
-				case "UF":
-					document.querySelector(`#${RUBIK_CUBE[5]}`).style.transformOrigin = "50% -50% calc( var(--length) / -3)";
-					break;
-				case "UR":
-					document.querySelector(`#${RUBIK_CUBE[5]}`).style.transformOrigin = "-50% -50%";
-					break;
-				default:
-					document.querySelector(`#${RUBIK_CUBE[5]}`).style.transformOrigin = "50% -50% calc( var(--length) / 3)";
-			}
+			document.querySelector(`#${RUBIK_CUBE[5]}`).style.transformOrigin = "50% -50% calc( var(--length) / 3)";
 			document.querySelector(`#${RUBIK_CUBE[5]}`).style.transform += "rotateY(-90deg)";
 
 			// UR
-			switch (RUBIK_CUBE[7]) {
-				case "UB":
-					document.querySelector(`#${RUBIK_CUBE[7]}`).style.transformOrigin = "50% -50% calc( var(--length) / 3)";
-					break;
-				case "UL":
-					document.querySelector(`#${RUBIK_CUBE[7]}`).style.transformOrigin = "150% -50%";
-					break;
-				case "UF":
-					document.querySelector(`#${RUBIK_CUBE[7]}`).style.transformOrigin = "50% -50% calc( var(--length) / -3)";
-					break;
-				default:
-					document.querySelector(`#${RUBIK_CUBE[7]}`).style.transformOrigin = "-50% -50%";
-			}
+			document.querySelector(`#${RUBIK_CUBE[7]}`).style.transformOrigin = "-50% -50%";
 			document.querySelector(`#${RUBIK_CUBE[7]}`).style.transform += "rotateY(-90deg)";
 
 			// UFR
-			switch (RUBIK_CUBE[8]) {
-				case "UBR":
-					document.querySelector(`#${RUBIK_CUBE[8]}`).style.transformOrigin = "-50% -50% calc( var(--length) / 3)";
-					break;
-				case "UBL":
-					document.querySelector(`#${RUBIK_CUBE[8]}`).style.transformOrigin = "150% -50% calc( var(--length) / 3)";
-					break;
-				case "UFL":
-					document.querySelector(`#${RUBIK_CUBE[8]}`).style.transformOrigin = "150% -50% calc( var(--length) / -3)";
-					break;
-				default:
-					document.querySelector(`#${RUBIK_CUBE[8]}`).style.transformOrigin = "-50% -50% calc( var(--length) / -3)";
-			}
+			document.querySelector(`#${RUBIK_CUBE[8]}`).style.transformOrigin = "-50% -50% calc( var(--length) / -3)";
 			document.querySelector(`#${RUBIK_CUBE[8]}`).style.transform += "rotateY(-90deg)";
 
 			// UFL
-			switch (RUBIK_CUBE[2]) {
-				case "UFR":
-					document.querySelector(`#${RUBIK_CUBE[2]}`).style.transformOrigin = "-50% -50% calc( var(--length) / -3)";
-					break;
-				case "UBR":
-					document.querySelector(`#${RUBIK_CUBE[2]}`).style.transformOrigin = "-50% -50% calc( var(--length) / 3)";
-					break;
-				case "UBL":
-					document.querySelector(`#${RUBIK_CUBE[2]}`).style.transformOrigin = "150% -50% calc( var(--length) / 3)";
-					break;
-				default:
-					document.querySelector(`#${RUBIK_CUBE[2]}`).style.transformOrigin = "150% -50% calc( var(--length) / -3)";
-			}
+			document.querySelector(`#${RUBIK_CUBE[2]}`).style.transformOrigin = "150% -50% calc( var(--length) / -3)";
 			document.querySelector(`#${RUBIK_CUBE[2]}`).style.transform += "rotateY(-90deg)";
 
 			// UBL
-			switch (RUBIK_CUBE[4]) {
-				case "UFL":
-					document.querySelector(`#${RUBIK_CUBE[4]}`).style.transformOrigin = "150% -50% calc( var(--length) / -3)";
-					break;
-				case "UFR":
-					document.querySelector(`#${RUBIK_CUBE[4]}`).style.transformOrigin = "-50% -50% calc( var(--length) / -3)";
-					break;
-				case "UBR":
-					document.querySelector(`#${RUBIK_CUBE[4]}`).style.transformOrigin = "-50% -50% calc( var(--length) / 3)";
-					break;
-				default:
-					document.querySelector(`#${RUBIK_CUBE[4]}`).style.transformOrigin = "150% -50% calc( var(--length) / 3)";
-			}
+			document.querySelector(`#${RUBIK_CUBE[4]}`).style.transformOrigin = "150% -50% calc( var(--length) / 3)";
 			document.querySelector(`#${RUBIK_CUBE[4]}`).style.transform += "rotateY(-90deg)";
 
 			// UBR
-			switch (RUBIK_CUBE[6]) {
-				case "UBL":
-					document.querySelector(`#${RUBIK_CUBE[6]}`).style.transformOrigin = "150% -50% calc( var(--length) / 3)";
-					break;
-				case "UFL":
-					document.querySelector(`#${RUBIK_CUBE[6]}`).style.transformOrigin = "150% -50% calc( var(--length) / -3)";
-					break;
-				case "UFR":
-					document.querySelector(`#${RUBIK_CUBE[6]}`).style.transformOrigin = "-50% -50% calc( var(--length) / -3)";
-					break;
-				default:
-					document.querySelector(`#${RUBIK_CUBE[6]}`).style.transformOrigin = "-50% -50% calc( var(--length) / 3)";
-			}
+			document.querySelector(`#${RUBIK_CUBE[6]}`).style.transformOrigin = "-50% -50% calc( var(--length) / 3)";
 			document.querySelector(`#${RUBIK_CUBE[6]}`).style.transform += "rotateY(-90deg)";
-
-			seriesSwap(RUBIK_CUBE, [1, 7, 5, 3]);
-			seriesSwap(RUBIK_CUBE, [8, 6, 4, 2]);
-
-			// console.log(RUBIK_CUBE[1] + ' ' + RUBIK_CUBE[7] + ' ' + RUBIK_CUBE[5] + ' ' + RUBIK_CUBE[3]);
 		});
 
 		document.querySelector("#control .F").addEventListener("click", (e) => {
-			console.log( getComputedStyle( document.querySelector(`#${RUBIK_CUBE[10]}`) ).transform );
 			// F
 			document.querySelector(`#${RUBIK_CUBE[10]}`).style.transformOrigin = "center center";
 			document.querySelector(`#${RUBIK_CUBE[10]}`).style.transform += "rotateZ(90deg)";
 
 			// UF
-			switch (RUBIK_CUBE[1]) {
-				case "FL":
-					document.querySelector(`#${RUBIK_CUBE[1]}`).style.transformOrigin = "150% 50%";
-					break;
-				case "DF":
-					document.querySelector(`#${RUBIK_CUBE[1]}`).style.transformOrigin = "50% -50%";
-					break;
-				case "FR":
-					document.querySelector(`#${RUBIK_CUBE[1]}`).style.transformOrigin = "-50% 50%";
-					break;
-				default:
-					document.querySelector(`#${RUBIK_CUBE[1]}`).style.transformOrigin = "center 150%";
-					break;
-			}
+			document.querySelector(`#${RUBIK_CUBE[1]}`).style.transformOrigin = "center 150%";
 			document.querySelector(`#${RUBIK_CUBE[1]}`).style.transform += "rotateZ(90deg)";
 
 			// DF
-			switch (RUBIK_CUBE[19]) {
-				case "FR":
-					document.querySelector(`#${RUBIK_CUBE[19]}`).style.transformOrigin = "-50% 50%";
-					break;
-				case "UF":
-					document.querySelector(`#${RUBIK_CUBE[19]}`).style.transformOrigin = "50% 150%";
-					break;
-				case "FL":
-					document.querySelector(`#${RUBIK_CUBE[19]}`).style.transformOrigin = "150% 50%";
-					break;
-				default:
-					document.querySelector(`#${RUBIK_CUBE[19]}`).style.transformOrigin = "center -50%";
-					break;
-			}
+			document.querySelector(`#${RUBIK_CUBE[19]}`).style.transformOrigin = "center -50%";
 			document.querySelector(`#${RUBIK_CUBE[19]}`).style.transform += "rotateZ(90deg)";
 
 			// FR
-			switch (RUBIK_CUBE[17]) {
-				case "UF":
-					document.querySelector(`#${RUBIK_CUBE[17]}`).style.transformOrigin = "50% 150%";
-					break;
-				case "FL":
-					document.querySelector(`#${RUBIK_CUBE[17]}`).style.transformOrigin = "150% 50%";
-					break;
-				case "DF":
-					document.querySelector(`#${RUBIK_CUBE[17]}`).style.transformOrigin = "50% -50%";
-					break;
-				default:
-					document.querySelector(`#${RUBIK_CUBE[17]}`).style.transformOrigin = "-50% 50%";
-					break;
-				}
+			document.querySelector(`#${RUBIK_CUBE[17]}`).style.transformOrigin = "-50% 50%";
 			document.querySelector(`#${RUBIK_CUBE[17]}`).style.transform += "rotateZ(90deg)";
 
 			// FL
-			switch (RUBIK_CUBE[11]) {
-				case "DF":
-					document.querySelector(`#${RUBIK_CUBE[11]}`).style.transformOrigin = "50% -50%";
-					break;
-				case "FR":
-					document.querySelector(`#${RUBIK_CUBE[11]}`).style.transformOrigin = "-50% 50%";
-					break;
-				case "UF":
-					document.querySelector(`#${RUBIK_CUBE[11]}`).style.transformOrigin = "50% 150%";
-					break;
-				default:
-					document.querySelector(`#${RUBIK_CUBE[11]}`).style.transformOrigin = "150% 50%";
-					break;
-				}
+			document.querySelector(`#${RUBIK_CUBE[11]}`).style.transformOrigin = "150% 50%";
 			document.querySelector(`#${RUBIK_CUBE[11]}`).style.transform += "rotateZ(90deg)";
 			
 			// UFR
-			switch (RUBIK_CUBE[8]) {
-				case "UFL":
-					document.querySelector(`#${RUBIK_CUBE[8]}`).style.transformOrigin = "150% 150%";
-					break;
-				case "DFL":
-					document.querySelector(`#${RUBIK_CUBE[8]}`).style.transformOrigin = "150% -50%";
-					break;
-				case "DFR":
-					document.querySelector(`#${RUBIK_CUBE[8]}`).style.transformOrigin = "-50% -50%";
-					break;
-				default:
-					document.querySelector(`#${RUBIK_CUBE[8]}`).style.transformOrigin = "-50% 150%";
-					break;
-			}
+			document.querySelector(`#${RUBIK_CUBE[8]}`).style.transformOrigin = "-50% 150%";
 			document.querySelector(`#${RUBIK_CUBE[8]}`).style.transform += "rotateZ(90deg)";
 			
 			// UFL
-			switch (RUBIK_CUBE[2]) {
-				case "DFL":
-					document.querySelector(`#${RUBIK_CUBE[2	]}`).style.transformOrigin = "150% -50%";
-					break;
-				case "DFR":
-					document.querySelector(`#${RUBIK_CUBE[2	]}`).style.transformOrigin = "-50% -50%";
-					break;
-				case "UFR":
-					document.querySelector(`#${RUBIK_CUBE[2	]}`).style.transformOrigin = "-50% 150%";
-					break;
-				default:
-					document.querySelector(`#${RUBIK_CUBE[2]}`).style.transformOrigin = "150% 150%";
-					break;
-			}
+			document.querySelector(`#${RUBIK_CUBE[2]}`).style.transformOrigin = "150% 150%";
 			document.querySelector(`#${RUBIK_CUBE[2]}`).style.transform += "rotateZ(90deg)";
 			
 			// DFR	
-			switch (RUBIK_CUBE[26]) {
-				case "UFR":
-					document.querySelector(`#${RUBIK_CUBE[26]}`).style.transformOrigin = "-50% 150%";
-					break;
-				case "UFL":
-					document.querySelector(`#${RUBIK_CUBE[26]}`).style.transformOrigin = "150% 150%";
-					break;
-				case "DFL":
-					document.querySelector(`#${RUBIK_CUBE[26]}`).style.transformOrigin = "150% -50%";
-					break;
-				default:
-					document.querySelector(`#${RUBIK_CUBE[26]}`).style.transformOrigin = "-50% -50%";
-					break;
-			}
+			document.querySelector(`#${RUBIK_CUBE[26]}`).style.transformOrigin = "-50% -50%";
 			document.querySelector(`#${RUBIK_CUBE[26]}`).style.transform += "rotateZ(90deg)";
 			
 			// DFL
-			switch (RUBIK_CUBE[20]) {
-				case "DFR":
-					document.querySelector(`#${RUBIK_CUBE[20]}`).style.transformOrigin = "-50% -50%";
-					break;
-				case "UFR":
-					document.querySelector(`#${RUBIK_CUBE[20]}`).style.transformOrigin = "-50% 150%";
-					break;
-				case "UFL":
-					document.querySelector(`#${RUBIK_CUBE[20]}`).style.transformOrigin = "150% 150%";
-					break;
-				default:
-					document.querySelector(`#${RUBIK_CUBE[20]}`).style.transformOrigin = "150% -50%";
-					break;
-			}
+			document.querySelector(`#${RUBIK_CUBE[20]}`).style.transformOrigin = "150% -50%";
 			document.querySelector(`#${RUBIK_CUBE[20]}`).style.transform += "rotateZ(90deg)";
 
-			seriesSwap(RUBIK_CUBE, [1, 11, 19, 17]);
-			seriesSwap(RUBIK_CUBE, [8, 2, 20, 26]);
+			// RUBIK_CUBE = seriesSwap(RUBIK_CUBE, [1, 11, 19, 17]);
 		});
 
 		document.querySelector("#control .R").addEventListener("click", (e) => {
@@ -703,8 +739,6 @@
 			// DFR
 			document.querySelector(`#${RUBIK_CUBE[26]}`).style.transformOrigin = "50% -50% calc( var(--length) / -3)";
 			document.querySelector(`#${RUBIK_CUBE[26]}`).style.transform += "rotateX(90deg)";
-
-			seriesSwap(RUBIK_CUBE, [7, 17, 25, 15]);
 		});
 
 		document.querySelector("#control .D").addEventListener("click", (e) => {
@@ -820,8 +854,6 @@
 			document.querySelector(`#${RUBIK_CUBE[22]}`).style.transformOrigin = "50% -50% calc( var(--length) / 3)";
 			document.querySelector(`#${RUBIK_CUBE[22]}`).style.transform += "rotateX(-90deg)";
 		});
-
-		document.querySelector("#control .R").click();
   </script>
 </body>
 </html>

@@ -47,7 +47,12 @@ body {
 
 	perspective: 9000vh;
 	background-color: rgba(0, 0, 200, 0);
-    /* transform: translate(-50%, -50%) rotateY(313deg) rotateX(343deg) rotateZ(18deg); */
+	/* transform: matrix3d(
+		1, 0, 0, 0, 
+		0, 1, 0, 0, 
+		0, 0, 1, 0, 
+		0, 0, 0, 1, 
+	); */
 }
 
 #rubik-cube .cubie {
@@ -57,7 +62,7 @@ body {
 	position: absolute;
 	transition: transform 0.5s;
 
-    background-color: rgba(200, 0, 0, 0);
+  background-color: rgba(200, 0, 0, 0);
 }
 
 .cubie-container {
@@ -72,15 +77,17 @@ body {
 	width: calc( var(--length) / var(--length-ratio) );
 	height: calc( var(--length) / var(--length-ratio) );
 	transform-style: preserve-3d;
-	font-weight: bolder;
 	position: absolute;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	font-size: 0;
 
 	border: var(--border-length) solid black;
-	opacity: 0.75;
+	opacity: 0.5;
+	filter: brightness(10);
+	font-size: 02vh;
+	font-weight: bolder;
+	color: black;
 }
 
 .up {
@@ -107,7 +114,7 @@ body {
 .green { background-color: green; }
 .blue { background-color: blue; }
 .red { background-color: red; }
-.orange { background-color: orange; }
+.orange { background-color: purple; }
 .black { background-color: black; }
 
 #U-container { transform: translateY( calc( var(--length) / var(--length-ratio) * -1 ) ); }
@@ -239,4 +246,43 @@ body {
 
 #control button {
 	padding: 2vh;
+}
+
+.helper::after {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 50%;
+	height: 50%;
+	content: '';
+	background-color: #f0f;
+	border-radius: 50%;
+	transform: translate3d(50% -50% calc( var(--length) / -3));
+}
+
+@media (orientation: landscape) {
+	body {
+		flex-direction: row;
+	}
+}
+
+@keyframes blink {
+	10% { opacity: 0.25;}
+	20% { opacity: 1;}
+	30% { opacity: 0.25;}
+	40% { opacity: 1;}
+	50% { opacity: 0.25;}
+	60% { opacity: 1;}
+	70% { opacity: 0.25;}
+	80% { opacity: 1;}
+	90% { opacity: 0.25;}
+}
+
+.blink {
+	animation: blink 1s infinite;
+	animation-play-state: running;
+}
+
+.blink:hover {
+	animation-play-state: running;
 }
