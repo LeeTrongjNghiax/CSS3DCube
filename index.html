@@ -381,290 +381,78 @@
 
 		document.querySelector("#control .U").addEventListener("click", (e) => {
 			// U
-			// if ( document.querySelector(`#${RUBIK_CUBE[0]}`).style.transform == `rotateY(-90deg) rotateY(-90deg) rotateY(-90deg) rotateY(-90deg)` ) {
-			// 	document.querySelector(`#${RUBIK_CUBE[0]}`).style.transform = ``;
-			// }
 			document.querySelector(`#${RUBIK_CUBE[0]}`).style.transformOrigin = "50% -50%";
 			document.querySelector(`#${RUBIK_CUBE[0]}`).style.transform += "rotateY(-90deg)";
 			
 			// UF
-			switch (RUBIK_CUBE[1]) {
-				case "UR":
-					document.querySelector(`#${RUBIK_CUBE[1]}`).style.transformOrigin = "-50% -50%";
-					break;
-				case "UB":
-					document.querySelector(`#${RUBIK_CUBE[1]}`).style.transformOrigin = "50% -50% calc( var(--length) / 3)";
-					break;
-				case "UL":
-					document.querySelector(`#${RUBIK_CUBE[1]}`).style.transformOrigin = "150% -50%";
-					break;
-				default:
-					document.querySelector(`#${RUBIK_CUBE[1]}`).style.transformOrigin = "50% -50% calc( var(--length) / -3)";
-			}
+			document.querySelector(`#${RUBIK_CUBE[1]}`).style.transformOrigin = "50% -50% calc( var(--length) / -3)";
 			document.querySelector(`#${RUBIK_CUBE[1]}`).style.transform += "rotateY(-90deg)";
 
 			// UL
-			switch (RUBIK_CUBE[3]) {
-				case "UF":
-					document.querySelector(`#${RUBIK_CUBE[3]}`).style.transformOrigin = "50% -50% calc( var(--length) / -3)";
-					break;
-				case "UR":
-					document.querySelector(`#${RUBIK_CUBE[3]}`).style.transformOrigin = "-50% -50%";
-					break;
-				case "UB":
-					document.querySelector(`#${RUBIK_CUBE[3]}`).style.transformOrigin = "50% -50% calc( var(--length) / 3)";
-					break;
-				default:
-					document.querySelector(`#${RUBIK_CUBE[3]}`).style.transformOrigin = "150% -50%";
-			}
+			document.querySelector(`#${RUBIK_CUBE[3]}`).style.transformOrigin = "150% -50%";
 			document.querySelector(`#${RUBIK_CUBE[3]}`).style.transform += "rotateY(-90deg)";
 
 			// UB
-			switch (RUBIK_CUBE[5]) {
-				case "UL":
-					document.querySelector(`#${RUBIK_CUBE[5]}`).style.transformOrigin = "150% -50%";
-					break;
-				case "UF":
-					document.querySelector(`#${RUBIK_CUBE[5]}`).style.transformOrigin = "50% -50% calc( var(--length) / -3)";
-					break;
-				case "UR":
-					document.querySelector(`#${RUBIK_CUBE[5]}`).style.transformOrigin = "-50% -50%";
-					break;
-				default:
-					document.querySelector(`#${RUBIK_CUBE[5]}`).style.transformOrigin = "50% -50% calc( var(--length) / 3)";
-			}
+			document.querySelector(`#${RUBIK_CUBE[5]}`).style.transformOrigin = "50% -50% calc( var(--length) / 3)";
 			document.querySelector(`#${RUBIK_CUBE[5]}`).style.transform += "rotateY(-90deg)";
 
 			// UR
-			switch (RUBIK_CUBE[7]) {
-				case "UB":
-					document.querySelector(`#${RUBIK_CUBE[7]}`).style.transformOrigin = "50% -50% calc( var(--length) / 3)";
-					break;
-				case "UL":
-					document.querySelector(`#${RUBIK_CUBE[7]}`).style.transformOrigin = "150% -50%";
-					break;
-				case "UF":
-					document.querySelector(`#${RUBIK_CUBE[7]}`).style.transformOrigin = "50% -50% calc( var(--length) / -3)";
-					break;
-				default:
-					document.querySelector(`#${RUBIK_CUBE[7]}`).style.transformOrigin = "-50% -50%";
-			}
+			document.querySelector(`#${RUBIK_CUBE[7]}`).style.transformOrigin = "-50% -50%";
 			document.querySelector(`#${RUBIK_CUBE[7]}`).style.transform += "rotateY(-90deg)";
 
 			// UFR
-			switch (RUBIK_CUBE[8]) {
-				case "UBR":
-					document.querySelector(`#${RUBIK_CUBE[8]}`).style.transformOrigin = "-50% -50% calc( var(--length) / 3)";
-					break;
-				case "UBL":
-					document.querySelector(`#${RUBIK_CUBE[8]}`).style.transformOrigin = "150% -50% calc( var(--length) / 3)";
-					break;
-				case "UFL":
-					document.querySelector(`#${RUBIK_CUBE[8]}`).style.transformOrigin = "150% -50% calc( var(--length) / -3)";
-					break;
-				default:
-					document.querySelector(`#${RUBIK_CUBE[8]}`).style.transformOrigin = "-50% -50% calc( var(--length) / -3)";
-			}
+			document.querySelector(`#${RUBIK_CUBE[8]}`).style.transformOrigin = "-50% -50% calc( var(--length) / -3)";
 			document.querySelector(`#${RUBIK_CUBE[8]}`).style.transform += "rotateY(-90deg)";
 
 			// UFL
-			switch (RUBIK_CUBE[2]) {
-				case "UFR":
-					document.querySelector(`#${RUBIK_CUBE[2]}`).style.transformOrigin = "-50% -50% calc( var(--length) / -3)";
-					break;
-				case "UBR":
-					document.querySelector(`#${RUBIK_CUBE[2]}`).style.transformOrigin = "-50% -50% calc( var(--length) / 3)";
-					break;
-				case "UBL":
-					document.querySelector(`#${RUBIK_CUBE[2]}`).style.transformOrigin = "150% -50% calc( var(--length) / 3)";
-					break;
-				default:
-					document.querySelector(`#${RUBIK_CUBE[2]}`).style.transformOrigin = "150% -50% calc( var(--length) / -3)";
-			}
+			document.querySelector(`#${RUBIK_CUBE[2]}`).style.transformOrigin = "150% -50% calc( var(--length) / -3)";
 			document.querySelector(`#${RUBIK_CUBE[2]}`).style.transform += "rotateY(-90deg)";
 
 			// UBL
-			switch (RUBIK_CUBE[4]) {
-				case "UFL":
-					document.querySelector(`#${RUBIK_CUBE[4]}`).style.transformOrigin = "150% -50% calc( var(--length) / -3)";
-					break;
-				case "UFR":
-					document.querySelector(`#${RUBIK_CUBE[4]}`).style.transformOrigin = "-50% -50% calc( var(--length) / -3)";
-					break;
-				case "UBR":
-					document.querySelector(`#${RUBIK_CUBE[4]}`).style.transformOrigin = "-50% -50% calc( var(--length) / 3)";
-					break;
-				default:
-					document.querySelector(`#${RUBIK_CUBE[4]}`).style.transformOrigin = "150% -50% calc( var(--length) / 3)";
-			}
+			document.querySelector(`#${RUBIK_CUBE[4]}`).style.transformOrigin = "150% -50% calc( var(--length) / 3)";
 			document.querySelector(`#${RUBIK_CUBE[4]}`).style.transform += "rotateY(-90deg)";
 
 			// UBR
-			switch (RUBIK_CUBE[6]) {
-				case "UBL":
-					document.querySelector(`#${RUBIK_CUBE[6]}`).style.transformOrigin = "150% -50% calc( var(--length) / 3)";
-					break;
-				case "UFL":
-					document.querySelector(`#${RUBIK_CUBE[6]}`).style.transformOrigin = "150% -50% calc( var(--length) / -3)";
-					break;
-				case "UFR":
-					document.querySelector(`#${RUBIK_CUBE[6]}`).style.transformOrigin = "-50% -50% calc( var(--length) / -3)";
-					break;
-				default:
-					document.querySelector(`#${RUBIK_CUBE[6]}`).style.transformOrigin = "-50% -50% calc( var(--length) / 3)";
-			}
+			document.querySelector(`#${RUBIK_CUBE[6]}`).style.transformOrigin = "-50% -50% calc( var(--length) / 3)";
 			document.querySelector(`#${RUBIK_CUBE[6]}`).style.transform += "rotateY(-90deg)";
-
-			seriesSwap(RUBIK_CUBE, [1, 7, 5, 3]);
-			seriesSwap(RUBIK_CUBE, [8, 6, 4, 2]);
-
-			// console.log(RUBIK_CUBE[1] + ' ' + RUBIK_CUBE[7] + ' ' + RUBIK_CUBE[5] + ' ' + RUBIK_CUBE[3]);
 		});
 
 		document.querySelector("#control .F").addEventListener("click", (e) => {
-			console.log( getComputedStyle( document.querySelector(`#${RUBIK_CUBE[10]}`) ).transform );
 			// F
 			document.querySelector(`#${RUBIK_CUBE[10]}`).style.transformOrigin = "center center";
 			document.querySelector(`#${RUBIK_CUBE[10]}`).style.transform += "rotateZ(90deg)";
 
 			// UF
-			switch (RUBIK_CUBE[1]) {
-				case "FL":
-					document.querySelector(`#${RUBIK_CUBE[1]}`).style.transformOrigin = "150% 50%";
-					break;
-				case "DF":
-					document.querySelector(`#${RUBIK_CUBE[1]}`).style.transformOrigin = "50% -50%";
-					break;
-				case "FR":
-					document.querySelector(`#${RUBIK_CUBE[1]}`).style.transformOrigin = "-50% 50%";
-					break;
-				default:
-					document.querySelector(`#${RUBIK_CUBE[1]}`).style.transformOrigin = "center 150%";
-					break;
-			}
+			document.querySelector(`#${RUBIK_CUBE[1]}`).style.transformOrigin = "center 150%";
 			document.querySelector(`#${RUBIK_CUBE[1]}`).style.transform += "rotateZ(90deg)";
 
 			// DF
-			switch (RUBIK_CUBE[19]) {
-				case "FR":
-					document.querySelector(`#${RUBIK_CUBE[19]}`).style.transformOrigin = "-50% 50%";
-					break;
-				case "UF":
-					document.querySelector(`#${RUBIK_CUBE[19]}`).style.transformOrigin = "50% 150%";
-					break;
-				case "FL":
-					document.querySelector(`#${RUBIK_CUBE[19]}`).style.transformOrigin = "150% 50%";
-					break;
-				default:
-					document.querySelector(`#${RUBIK_CUBE[19]}`).style.transformOrigin = "center -50%";
-					break;
-			}
+			document.querySelector(`#${RUBIK_CUBE[19]}`).style.transformOrigin = "center -50%";
 			document.querySelector(`#${RUBIK_CUBE[19]}`).style.transform += "rotateZ(90deg)";
 
 			// FR
-			switch (RUBIK_CUBE[17]) {
-				case "UF":
-					document.querySelector(`#${RUBIK_CUBE[17]}`).style.transformOrigin = "50% 150%";
-					break;
-				case "FL":
-					document.querySelector(`#${RUBIK_CUBE[17]}`).style.transformOrigin = "150% 50%";
-					break;
-				case "DF":
-					document.querySelector(`#${RUBIK_CUBE[17]}`).style.transformOrigin = "50% -50%";
-					break;
-				default:
-					document.querySelector(`#${RUBIK_CUBE[17]}`).style.transformOrigin = "-50% 50%";
-					break;
-				}
 			document.querySelector(`#${RUBIK_CUBE[17]}`).style.transform += "rotateZ(90deg)";
+			document.querySelector(`#${RUBIK_CUBE[17]}`).style.transformOrigin = "-50% 50%";
 
 			// FL
-			switch (RUBIK_CUBE[11]) {
-				case "DF":
-					document.querySelector(`#${RUBIK_CUBE[11]}`).style.transformOrigin = "50% -50%";
-					break;
-				case "FR":
-					document.querySelector(`#${RUBIK_CUBE[11]}`).style.transformOrigin = "-50% 50%";
-					break;
-				case "UF":
-					document.querySelector(`#${RUBIK_CUBE[11]}`).style.transformOrigin = "50% 150%";
-					break;
-				default:
-					document.querySelector(`#${RUBIK_CUBE[11]}`).style.transformOrigin = "150% 50%";
-					break;
-				}
+			document.querySelector(`#${RUBIK_CUBE[11]}`).style.transformOrigin = "150% 50%";
 			document.querySelector(`#${RUBIK_CUBE[11]}`).style.transform += "rotateZ(90deg)";
 			
 			// UFR
-			switch (RUBIK_CUBE[8]) {
-				case "UFL":
-					document.querySelector(`#${RUBIK_CUBE[8]}`).style.transformOrigin = "150% 150%";
-					break;
-				case "DFL":
-					document.querySelector(`#${RUBIK_CUBE[8]}`).style.transformOrigin = "150% -50%";
-					break;
-				case "DFR":
-					document.querySelector(`#${RUBIK_CUBE[8]}`).style.transformOrigin = "-50% -50%";
-					break;
-				default:
-					document.querySelector(`#${RUBIK_CUBE[8]}`).style.transformOrigin = "-50% 150%";
-					break;
-			}
+			document.querySelector(`#${RUBIK_CUBE[8]}`).style.transformOrigin = "-50% 150%";
 			document.querySelector(`#${RUBIK_CUBE[8]}`).style.transform += "rotateZ(90deg)";
 			
 			// UFL
-			switch (RUBIK_CUBE[2]) {
-				case "DFL":
-					document.querySelector(`#${RUBIK_CUBE[2	]}`).style.transformOrigin = "150% -50%";
-					break;
-				case "DFR":
-					document.querySelector(`#${RUBIK_CUBE[2	]}`).style.transformOrigin = "-50% -50%";
-					break;
-				case "UFR":
-					document.querySelector(`#${RUBIK_CUBE[2	]}`).style.transformOrigin = "-50% 150%";
-					break;
-				default:
-					document.querySelector(`#${RUBIK_CUBE[2]}`).style.transformOrigin = "150% 150%";
-					break;
-			}
+			document.querySelector(`#${RUBIK_CUBE[2]}`).style.transformOrigin = "150% 150%";
 			document.querySelector(`#${RUBIK_CUBE[2]}`).style.transform += "rotateZ(90deg)";
 			
-			// DFR	
-			switch (RUBIK_CUBE[26]) {
-				case "UFR":
-					document.querySelector(`#${RUBIK_CUBE[26]}`).style.transformOrigin = "-50% 150%";
-					break;
-				case "UFL":
-					document.querySelector(`#${RUBIK_CUBE[26]}`).style.transformOrigin = "150% 150%";
-					break;
-				case "DFL":
-					document.querySelector(`#${RUBIK_CUBE[26]}`).style.transformOrigin = "150% -50%";
-					break;
-				default:
-					document.querySelector(`#${RUBIK_CUBE[26]}`).style.transformOrigin = "-50% -50%";
-					break;
-			}
+			// DFR
+			document.querySelector(`#${RUBIK_CUBE[26]}`).style.transformOrigin = "-50% -50%";
 			document.querySelector(`#${RUBIK_CUBE[26]}`).style.transform += "rotateZ(90deg)";
 			
 			// DFL
-			switch (RUBIK_CUBE[20]) {
-				case "DFR":
-					document.querySelector(`#${RUBIK_CUBE[20]}`).style.transformOrigin = "-50% -50%";
-					break;
-				case "UFR":
-					document.querySelector(`#${RUBIK_CUBE[20]}`).style.transformOrigin = "-50% 150%";
-					break;
-				case "UFL":
-					document.querySelector(`#${RUBIK_CUBE[20]}`).style.transformOrigin = "150% 150%";
-					break;
-				default:
-					document.querySelector(`#${RUBIK_CUBE[20]}`).style.transformOrigin = "150% -50%";
-					break;
-			}
+			document.querySelector(`#${RUBIK_CUBE[20]}`).style.transformOrigin = "150% -50%";
 			document.querySelector(`#${RUBIK_CUBE[20]}`).style.transform += "rotateZ(90deg)";
-
-			seriesSwap(RUBIK_CUBE, [1, 11, 19, 17]);
-			seriesSwap(RUBIK_CUBE, [8, 2, 20, 26]);
 		});
 
 		document.querySelector("#control .R").addEventListener("click", (e) => {
@@ -703,8 +491,6 @@
 			// DFR
 			document.querySelector(`#${RUBIK_CUBE[26]}`).style.transformOrigin = "50% -50% calc( var(--length) / -3)";
 			document.querySelector(`#${RUBIK_CUBE[26]}`).style.transform += "rotateX(90deg)";
-
-			seriesSwap(RUBIK_CUBE, [7, 17, 25, 15]);
 		});
 
 		document.querySelector("#control .D").addEventListener("click", (e) => {
