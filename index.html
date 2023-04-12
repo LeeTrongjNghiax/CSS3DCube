@@ -9,6 +9,43 @@
 	<link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
+	<div id="container">
+		<div id="rubik-cube"></div>
+	</div>
+
+	<div id="control">
+		<div id="move">
+			<button class="U">U</button>
+			<button class="D">D</button>
+			<button class="F">F</button>
+			<button class="B">B</button>
+			<button class="R">R</button>
+			<button class="L">L</button>
+		</div>
+		<div id="rotate">
+			<form action="">
+				<label for="rotate-x">X</label>
+				<input type="range" name="rotate-x" id="rotate-x" min="-360" step="1" max="360" value="341">
+				<span id="x-value"></span>
+			</form>
+			<form action="">
+				<label for="rotate-x">Y</label>
+				<input type="range" name="rotate-y" id="rotate-y" min="-360" step="1" max="360" value="315">
+				<span id="y-value"></span>
+			</form>
+			<form action="">
+				<label for="rotate-x">Z</label>
+				<input type="range" name="rotate-z" id="rotate-z" min="-360" step="1" max="360" value="1">
+				<span id="z-value"></span>
+			</form>
+			<form action="">
+				<label for="perspective">Perspetive</label>
+				<input type="range" name="perspective" id="perspective" min="20000" step="10" max="30000" value="20000">
+				<span id="perspective-value"></span>
+			</form>
+		</div>
+	</div>
+
 	<script src="script.js"></script>
 </body>
 </html>

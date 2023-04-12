@@ -1,5 +1,5 @@
 :root {
-	--length: 35vh;
+	--length: 210px;
 	--border-length: 1vh;
 	--length-ratio: 3;
 }
@@ -47,12 +47,6 @@ body {
 
 	perspective: 9000vh;
 	background-color: rgba(0, 0, 200, 0);
-	/* transform: matrix3d(
-		1, 0, 0, 0, 
-		0, 1, 0, 0, 
-		0, 0, 1, 0, 
-		0, 0, 0, 1, 
-	); */
 }
 
 #rubik-cube .cubie {
@@ -62,7 +56,7 @@ body {
 	position: absolute;
 	transition: transform 0.5s;
 
-  background-color: rgba(200, 0, 0, 0);
+  	background-color: rgba(200, 0, 0, 0);
 }
 
 .cubie-container {
@@ -84,6 +78,7 @@ body {
 
 	border: var(--border-length) solid black;
 	opacity: 0.5;
+	/* opacity: 1; */
 	filter: brightness(10);
 	font-size: 02vh;
 	font-weight: bolder;
@@ -124,7 +119,7 @@ body {
 #R-container { transform: translateX( calc( var(--length) / var(--length-ratio) * 1 ) ); }
 #L-container { transform: translateX( calc( var(--length) / var(--length-ratio) * -1 ) ); }
 
-#UF-container {
+/* #UF-container {
 	transform: 
 		translateY( calc( var(--length) / var(--length-ratio) * -1 ) ) 
 		translateZ( calc( var(--length) / var(--length-ratio) * 1 ) );
@@ -236,7 +231,7 @@ body {
 		translateY( calc( var(--length) / var(--length-ratio) * 1 ) ) 
 		translateZ( calc( var(--length) / var(--length-ratio) * -1 ) ) 
 		translateX( calc( var(--length) / var(--length-ratio) * -1 ) );
-}
+} */
 
 #control #move {
 	width: 100%;

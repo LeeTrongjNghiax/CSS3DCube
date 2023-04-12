@@ -14,23 +14,37 @@ printMatrix3D = matrix => {
   );
 }
 
+class Face {
+  constructor(normal, color) {
+    this.normal = normal;
+    this.color = color;
+  }
+}
+
 class Cubie {
-  constructor(positions, matrix, type, name) {
+  constructor(positions, matrix, type, name, faces) {
     this.positions = positions;
     this.matrix = matrix;
     this.type = type;
     this.name = name;
+    this.faces = faces;
   }
   update(tx, ty, tz) {
-    this.x = tx;
-    this.y = ty;
-    this.z = tz;
+    this.positions.x = tx;
+    this.positions.y = ty;
+    this.positions.z = tz;
   }
+  setMatrix(matrix) {
+    this.matrix = matrix;
+  }
+  getMatrix = () => this.matrix;
 }
 
-let side = 10;
-let index = 0;
+const side = getComputedStyle(document.body).getPropertyValue('--length').slice(0, -2) / 3;
+const faces = ["up", "down", "front", "back", "right", "left"];
+const colors = ["white", "yellow", "green", "blue", "red", "orange"];
 let RubikCube = [];
+let index = 0;
 
 for (let x = -1; x <= 1; x++) {
   for (let y = -1; y <= 1; y++) {
@@ -48,7 +62,7 @@ for (let x = -1; x <= 1; x++) {
       }
 
       let name = "";
-      name += (y > 0) ? "U" : (y < 0) ? "D" : "";
+      name += (y > 0) ? "D" : (y < 0) ? "U" : "";
       name += (z > 0) ? "F" : (z < 0) ? "B" : "";
       name += (x > 0) ? "R" : (x < 0) ? "L" : "";
       name = (name == "") ? "core" : name;
@@ -61,30 +75,98 @@ for (let x = -1; x <= 1; x++) {
       // printMatrix3D(matrix);
       // console.log("---------");
 
-      RubikCube[index] = new Cubie({x: x, y: y, z: z}, matrix, type, name);
+      let f = [];
+
+      f.push(
+        new Face([0, -1, 0], faces[0]), 
+        new Face([0, 1, 0], faces[1]), 
+        new Face([0, 0, 1], faces[2]), 
+        new Face([0, 0, -1], faces[3]), 
+        new Face([1, 0, 0], faces[4]), 
+        new Face([-1, 0, 0], faces[5]), 
+      );
+
+      RubikCube[index] = new Cubie({x: x, y: y, z: z}, matrix, type, name, f);
       index++;
     }
   }
 }
 
-function turnZ() {
+turnZ = () => {
   for (let i = 0; i < RubikCube.length; i++) {
-    let cubie = RubikCube[i];
-    if ( cubie.positions.z == 1 ) {
-      // console.log("x: " + cubie.positions.x + ", y: " + cubie.positions.y);
-
+    if ( RubikCube[i].positions.z == 1 ) {
       let matrix = new DOMMatrix();
       matrix = matrix.rotate(90);
-      matrix = matrix.translate(cubie.positions.x, cubie.positions.y);
+      matrix = matrix.translate(RubikCube[i].positions.x, RubikCube[i].positions.y);
 
-      printMatrix2D(matrix);
-      cubie.update(matrix.e, matrix.f, cubie.positions.z);
+      // printMatrix2D(matrix);
+
+      // console.log("Before: x: " + RubikCube[i].positions.x + ", y: " + RubikCube[i].positions.y);
+      // printMatrix2D(RubikCube[i].matrix);
+
+      RubikCube[i].update(matrix.e, matrix.f, RubikCube[i].positions.z);
+
+      // console.log("After:  x: " + RubikCube[i].positions.x + ", y: " + RubikCube[i].positions.y);
+      // printMatrix2D(RubikCube[i].matrix);
+      
+      RubikCube[i].setMatrix(matrix);
 
       // console.log("--------------------------------------");
     }
   }
 }
 
-// console.log(RubikCube);
+generateRubik = () => {
+  let container = document.querySelector("#rubik-cube");
 
-turnZ();
+  for (let i = 0; i < RubikCube.length; i++) {
+    if (RubikCube[i].positions.z == 1) {
+      let con = document.createElement("div");
+      con.setAttribute("class", "cubie-container");
+      con.setAttribute("id", `${RubikCube[i].name}-container`);
+
+      for (let j = 0; j < 6; j++) {
+        let face = document.createElement("div");
+
+        face.classList.add(faces[j], colors[j], "face");
+        con.appendChild(face);
+      }
+
+      container.appendChild(con);
+    }
+  }
+}
+
+document.querySelector("#move .F").addEventListener("click", () => {
+  // alert`wrsghwr`
+  turnZ();
+})
+
+loop = () => {
+  document.querySelector("#x-value").innerHTML = document.querySelector("form #rotate-x").value;
+  document.querySelector("#y-value").innerHTML = document.querySelector("form #rotate-y").value;
+  document.querySelector("#z-value").innerHTML = document.querySelector("form #rotate-z").value;
+  document.querySelector("#perspective-value").innerHTML = document.querySelector("#perspective").value;
+
+  document.querySelector("#rubik-cube").style.transform = `
+    translate(-50%, -50%) 
+    rotateX(${document.querySelector("form #rotate-x").value}deg) 
+    rotateY(${document.querySelector("form #rotate-y").value}deg) 
+    rotateZ(${document.querySelector("form #rotate-z").value}deg)
+  ` 
+  document.querySelector("#rubik-cube").style.perspective = `${document.querySelector("#perspective").value}px`;
+
+  for (let i = 0; i < RubikCube.length; i++) {
+    if (RubikCube[i].positions.z == 1) {
+      let matrix = new DOMMatrix();
+      matrix = matrix.translate(RubikCube[i].positions.x * side, RubikCube[i].positions.y * side, RubikCube[i].positions.z * side);
+      document.querySelector(`#${RubikCube[i].name}-container`).style.transform = matrix;
+    }
+  }
+
+  requestAnimationFrame(loop);
+}
+
+generateRubik();
+
+loop();
