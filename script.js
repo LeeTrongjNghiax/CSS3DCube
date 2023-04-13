@@ -14,10 +14,31 @@ printMatrix3D = matrix => {
   );
 }
 
+degreesToradians = degrees => degrees * ( Math.PI / 180);
+
 class Face {
-  constructor(normal, color) {
+  constructor(normal, name, color) {
     this.normal = normal;
+    this.name = name;
     this.color = color;
+  }
+  turnZ(angle) {
+    let v = JSON.parse( JSON.stringify( this.normal ) );
+    this.normal[0] = v[0] * Math.round(Math.cos(angle)) - v[1] * Math.round(Math.sin(angle));
+    this.normal[1] = v[0] * Math.round(Math.sin(angle)) + v[1] * Math.round(Math.cos(angle));
+    this.normal[2] = v[2];
+  }
+  turnY(angle) {
+    let v = JSON.parse( JSON.stringify( this.normal ) );
+    this.normal[0] = v[0] * Math.round(Math.cos(angle)) - v[2] * Math.round(Math.sin(angle));
+    this.normal[2] = v[0] * Math.round(Math.sin(angle)) + v[2] * Math.round(Math.cos(angle));
+    this.normal[1] = v[1];
+  }
+  turnX(angle) {
+    let v = JSON.parse( JSON.stringify( this.normal ) );
+    this.normal[1] = v[1] * Math.round(Math.cos(angle)) - v[2] * Math.round(Math.sin(angle));
+    this.normal[2] = v[1] * Math.round(Math.sin(angle)) + v[2] * Math.round(Math.cos(angle));
+    this.normal[0] = v[0];
   }
 }
 
@@ -38,6 +59,21 @@ class Cubie {
     this.matrix = matrix;
   }
   getMatrix = () => this.matrix;
+  turnFaceY = (dir, angle) => {
+    for (let i = 0; i < this.faces.length; i++) {
+      this.faces[i].turnY(dir * angle);
+    }
+  }
+  turnFaceZ = (dir, angle) => {
+    for (let i = 0; i < this.faces.length; i++) {
+      this.faces[i].turnZ(dir * angle);
+    }
+  }
+  turnFaceX = (dir, angle) => {
+    for (let i = 0; i < this.faces.length; i++) {
+      this.faces[i].turnX(dir * angle);
+    }
+  }
 }
 
 const side = getComputedStyle(document.body).getPropertyValue('--length').slice(0, -2) / 3;
@@ -78,12 +114,12 @@ for (let x = -1; x <= 1; x++) {
       let f = [];
 
       f.push(
-        new Face([0, -1, 0], faces[0]), 
-        new Face([0, 1, 0], faces[1]), 
-        new Face([0, 0, 1], faces[2]), 
-        new Face([0, 0, -1], faces[3]), 
-        new Face([1, 0, 0], faces[4]), 
-        new Face([-1, 0, 0], faces[5]), 
+        new Face([0, -1, 0], faces[0], colors[0]), 
+        new Face([0, 1, 0], faces[1], colors[1]), 
+        new Face([0, 0, 1], faces[2], colors[2]), 
+        new Face([0, 0, -1], faces[3], colors[3]), 
+        new Face([1, 0, 0], faces[4], colors[4]), 
+        new Face([-1, 0, 0], faces[5], colors[5]), 
       );
 
       RubikCube[index] = new Cubie({x: x, y: y, z: z}, matrix, type, name, f);
@@ -92,26 +128,42 @@ for (let x = -1; x <= 1; x++) {
   }
 }
 
-turnZ = () => {
+turnY = (index, dir, angle) => {
   for (let i = 0; i < RubikCube.length; i++) {
-    if ( RubikCube[i].positions.z == 1 ) {
+    if ( RubikCube[i].positions.y == index ) {
       let matrix = new DOMMatrix();
-      matrix = matrix.rotate(90);
+      matrix = matrix.rotate(dir * angle);
+      matrix = matrix.translate(RubikCube[i].positions.x, RubikCube[i].positions.z);
+
+      RubikCube[i].update(matrix.m41, RubikCube[i].positions.y, matrix.m42);
+      // RubikCube[i].setMatrix(matrix);
+      RubikCube[i].turnFaceY(dir, degreesToradians(angle) );
+    }
+  }
+}
+turnZ = (index, dir, angle) => {
+  for (let i = 0; i < RubikCube.length; i++) {
+    if ( RubikCube[i].positions.z == index ) {
+      let matrix = new DOMMatrix();
+      matrix = matrix.rotate(dir * angle);
       matrix = matrix.translate(RubikCube[i].positions.x, RubikCube[i].positions.y);
 
-      // printMatrix2D(matrix);
+      RubikCube[i].update(matrix.m41, matrix.m42, RubikCube[i].positions.z);
+      // RubikCube[i].setMatrix(matrix);
+      RubikCube[i].turnFaceZ(dir, degreesToradians(angle) );
+    }
+  }
+}
+turnX = (index, dir, angle) => {
+  for (let i = 0; i < RubikCube.length; i++) {
+    if ( RubikCube[i].positions.x == index ) {
+      let matrix = new DOMMatrix();
+      matrix = matrix.rotate(dir * angle);
+      matrix = matrix.translate(RubikCube[i].positions.y, RubikCube[i].positions.z);
 
-      // console.log("Before: x: " + RubikCube[i].positions.x + ", y: " + RubikCube[i].positions.y);
-      // printMatrix2D(RubikCube[i].matrix);
-
-      RubikCube[i].update(matrix.e, matrix.f, RubikCube[i].positions.z);
-
-      // console.log("After:  x: " + RubikCube[i].positions.x + ", y: " + RubikCube[i].positions.y);
-      // printMatrix2D(RubikCube[i].matrix);
-      
-      RubikCube[i].setMatrix(matrix);
-
-      // console.log("--------------------------------------");
+      RubikCube[i].update(RubikCube[i].positions.x, matrix.m41, matrix.m42);
+      // RubikCube[i].setMatrix(matrix);
+      RubikCube[i].turnFaceX(dir, degreesToradians(angle) );
     }
   }
 }
@@ -120,15 +172,17 @@ generateRubik = () => {
   let container = document.querySelector("#rubik-cube");
 
   for (let i = 0; i < RubikCube.length; i++) {
-    if (RubikCube[i].positions.z == 1) {
+    if (
+      true
+    ) {
       let con = document.createElement("div");
       con.setAttribute("class", "cubie-container");
       con.setAttribute("id", `${RubikCube[i].name}-container`);
 
-      for (let j = 0; j < 6; j++) {
+      for (let j = 0; j < RubikCube[i].faces.length; j++) {
         let face = document.createElement("div");
 
-        face.classList.add(faces[j], colors[j], "face");
+        face.classList.add(RubikCube[i].faces[j].name, RubikCube[i].faces[j].color, "face");
         con.appendChild(face);
       }
 
@@ -136,11 +190,6 @@ generateRubik = () => {
     }
   }
 }
-
-document.querySelector("#move .F").addEventListener("click", () => {
-  // alert`wrsghwr`
-  turnZ();
-})
 
 loop = () => {
   document.querySelector("#x-value").innerHTML = document.querySelector("form #rotate-x").value;
@@ -157,10 +206,43 @@ loop = () => {
   document.querySelector("#rubik-cube").style.perspective = `${document.querySelector("#perspective").value}px`;
 
   for (let i = 0; i < RubikCube.length; i++) {
-    if (RubikCube[i].positions.z == 1) {
+    if (
+      true
+    ) {
       let matrix = new DOMMatrix();
-      matrix = matrix.translate(RubikCube[i].positions.x * side, RubikCube[i].positions.y * side, RubikCube[i].positions.z * side);
+      matrix = matrix.translate(
+        RubikCube[i].positions.x * side, 
+        RubikCube[i].positions.y * side, 
+        RubikCube[i].positions.z * side
+      );
       document.querySelector(`#${RubikCube[i].name}-container`).style.transform = matrix;
+
+      for (let j = 0; j < RubikCube[i].faces.length; j++) {
+        let matrix2 = new DOMMatrix();
+        if ( Math.abs(RubikCube[i].faces[j].normal[0]) > 0 ) {
+          matrix2 = matrix2.translate(
+            RubikCube[i].faces[j].normal[0] * side / -2, 
+            RubikCube[i].faces[j].normal[2] * side / 2, 
+            Math.abs( RubikCube[i].faces[j].normal[0] * side / 2 ), 
+          );
+          matrix2 = matrix2.rotate(0, RubikCube[i].faces[j].normal[0] * 90, 0);
+        } 
+        if ( Math.abs(RubikCube[i].faces[j].normal[1]) > 0 ) {
+          matrix2 = matrix2.rotate(90, 0, 0);
+          matrix2 = matrix2.translate(
+            RubikCube[i].faces[j].normal[0] * side / 2, 
+            RubikCube[i].faces[j].normal[2] * side / 2, 
+            RubikCube[i].faces[j].normal[1] * side / 2, 
+          );
+        } else {
+          matrix2 = matrix2.translate(
+            RubikCube[i].faces[j].normal[0] * side / 2, 
+            RubikCube[i].faces[j].normal[1] * side / 2, 
+            RubikCube[i].faces[j].normal[2] * side / 2
+          );
+        }
+        document.querySelector(`#${RubikCube[i].name}-container .${RubikCube[i].faces[j].name}`).style.transform = matrix2;
+      }
     }
   }
 
@@ -170,3 +252,10 @@ loop = () => {
 generateRubik();
 
 loop();
+
+document.querySelector("#move .U").addEventListener("click", () => turnY(1, 1, 90));
+document.querySelector("#move .D").addEventListener("click", () => turnY(-1, -1, 90));
+document.querySelector("#move .F").addEventListener("click", () => turnZ(1, 1, 90));
+document.querySelector("#move .B").addEventListener("click", () => turnZ(-1, -1, 90));
+document.querySelector("#move .R").addEventListener("click", () => turnX(-1, 1, 90));
+document.querySelector("#move .L").addEventListener("click", () => turnX(1, -1, 90));

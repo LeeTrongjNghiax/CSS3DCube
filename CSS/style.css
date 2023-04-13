@@ -54,7 +54,7 @@ body {
 	height: calc( var(--length) / var(--length-ratio) );
 	transform-style: preserve-3d;
 	position: absolute;
-	transition: transform 0.5s;
+	transition: transform 0.25s;
 
   	background-color: rgba(200, 0, 0, 0);
 }
@@ -85,7 +85,7 @@ body {
 	color: black;
 }
 
-.up {
+/* .up {
 	transform: rotateX(90deg) translateZ(calc(var(--length) / var(--length-ratio) * 1 / 2));
 }
 .down {
@@ -102,136 +102,15 @@ body {
 }
 .left {
 	transform: rotateY(-90deg) translateZ(calc(var(--length) / var(--length-ratio) * 1 / 2));
-}
+} */
 
 .white { background-color: white; }
 .yellow { background-color: yellow; }
 .green { background-color: green; }
 .blue { background-color: blue; }
 .red { background-color: red; }
-.orange { background-color: purple; }
+.orange { background-color: orange; }
 .black { background-color: black; }
-
-#U-container { transform: translateY( calc( var(--length) / var(--length-ratio) * -1 ) ); }
-#D-container { transform: translateY( calc( var(--length) / var(--length-ratio) * 1 ) ); }
-#F-container { transform: translateZ( calc( var(--length) / var(--length-ratio) * 1 ) ); } 
-#B-container { transform: translateZ( calc( var(--length) / var(--length-ratio) * -1 ) ); }
-#R-container { transform: translateX( calc( var(--length) / var(--length-ratio) * 1 ) ); }
-#L-container { transform: translateX( calc( var(--length) / var(--length-ratio) * -1 ) ); }
-
-/* #UF-container {
-	transform: 
-		translateY( calc( var(--length) / var(--length-ratio) * -1 ) ) 
-		translateZ( calc( var(--length) / var(--length-ratio) * 1 ) );
-}
-#UL-container {
-	transform: 
-		translateY( calc( var(--length) / var(--length-ratio) * -1 ) ) 
-		translateX( calc( var(--length) / var(--length-ratio) * -1 ) );
-}
-#UB-container {
-	transform: 
-		translateY( calc( var(--length) / var(--length-ratio) * -1 ) ) 
-		translateZ( calc( var(--length) / var(--length-ratio) * -1 ) );
-}
-#UR-container {
-	transform: 
-		translateY( calc( var(--length) / var(--length-ratio) * -1 ) ) 
-		translateX( calc( var(--length) / var(--length-ratio) * 1 ) );
-}
-
-#DF-container {
-	transform: 
-		translateY( calc( var(--length) / var(--length-ratio) * 1 ) ) 
-		translateZ( calc( var(--length) / var(--length-ratio) * 1 ) );
-}
-#DL-container {
-	transform: 
-		translateY( calc( var(--length) / var(--length-ratio) * 1 ) ) 
-		translateX( calc( var(--length) / var(--length-ratio) * -1 ) );
-}
-#DB-container {
-	transform: 
-		translateY( calc( var(--length) / var(--length-ratio) * 1 ) ) 
-		translateZ( calc( var(--length) / var(--length-ratio) * -1 ) );
-}
-#DR-container {
-	transform: 
-		translateY( calc( var(--length) / var(--length-ratio) * 1 ) ) 
-		translateX( calc( var(--length) / var(--length-ratio) * 1 ) );
-}
-
-#FR-container{
-	transform: 
-		translateZ( calc( var(--length) / var(--length-ratio) * 1 ) ) 
-		translateX( calc( var(--length) / var(--length-ratio) * 1 ) );
-}
-#FL-container {
-	transform: 
-		translateZ( calc( var(--length) / var(--length-ratio) * 1 ) ) 
-		translateX( calc( var(--length) / var(--length-ratio) * -1 ) );
-}
-
-#BR-container {
-	transform: 
-		translateZ( calc( var(--length) / var(--length-ratio) * -1 ) ) 
-		translateX( calc( var(--length) / var(--length-ratio) * 1 ) );
-}
-#BL-container {
-	transform: 
-		translateZ( calc( var(--length) / var(--length-ratio) * -1 ) ) 
-		translateX( calc( var(--length) / var(--length-ratio) * -1 ) );
-}
-
-#UFR-container {
-	transform: 
-		translateY( calc( var(--length) / var(--length-ratio) * -1 ) ) 
-		translateZ( calc( var(--length) / var(--length-ratio) * 1 ) ) 
-		translateX( calc( var(--length) / var(--length-ratio) * 1 ) );
-}
-#UFL-container {
-	transform: 
-		translateY( calc( var(--length) / var(--length-ratio) * -1 ) ) 
-		translateZ( calc( var(--length) / var(--length-ratio) * 1 ) ) 
-		translateX( calc( var(--length) / var(--length-ratio) * -1 ) );
-}
-#UBR-container {
-	transform: 
-		translateY( calc( var(--length) / var(--length-ratio) * -1 ) ) 
-		translateZ( calc( var(--length) / var(--length-ratio) * -1 ) ) 
-		translateX( calc( var(--length) / var(--length-ratio) * 1 ) );
-}
-#UBL-container {
-	transform: 
-		translateY( calc( var(--length) / var(--length-ratio) * -1 ) ) 
-		translateZ( calc( var(--length) / var(--length-ratio) * -1 ) ) 
-		translateX( calc( var(--length) / var(--length-ratio) * -1 ) );
-}
-
-#DFR-container {
-	transform: 
-		translateY( calc( var(--length) / var(--length-ratio) * 1 ) ) 
-		translateZ( calc( var(--length) / var(--length-ratio) * 1 ) ) 
-		translateX( calc( var(--length) / var(--length-ratio) * 1 ) );
-}
-#DFL-container {
-	transform: 
-		translateY( calc( var(--length) / var(--length-ratio) * 1 ) ) 
-		translateZ( calc( var(--length) / var(--length-ratio) * 1 ) ) 
-		translateX( calc( var(--length) / var(--length-ratio) * -1 ) );
-}
-#DBR-container {
-	transform: 
-		translateY( calc( var(--length) / var(--length-ratio) * 1 ) ) 
-		translateZ( calc( var(--length) / var(--length-ratio) * -1 ) ) 
-		translateX( calc( var(--length) / var(--length-ratio) * 1 ) );
-}
-#DBL-container {
-	transform: 
-		translateY( calc( var(--length) / var(--length-ratio) * 1 ) ) 
-		translateZ( calc( var(--length) / var(--length-ratio) * -1 ) ) 
-		translateX( calc( var(--length) / var(--length-ratio) * -1 ) );
-} */
 
 #control #move {
 	width: 100%;
