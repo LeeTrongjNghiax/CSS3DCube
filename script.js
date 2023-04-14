@@ -1,21 +1,3 @@
-printMatrix2D = matrix => {
-  console.log("2d: \n" + 
-    matrix.a + " " + matrix.c + " " + matrix.e + "\n" + 
-    matrix.b + " " + matrix.d + " " + matrix.f + "\n"
-  );
-}
-
-printMatrix3D = matrix => {
-  console.log("3d: \n" + 
-    matrix.m11 + " " + matrix.m21 + " " + matrix.m31 + " " + matrix.m41 + "\n" + 
-    matrix.m12 + " " + matrix.m22 + " " + matrix.m32 + " " + matrix.m42 + "\n" + 
-    matrix.m13 + " " + matrix.m23 + " " + matrix.m33 + " " + matrix.m43 + "\n" + 
-    matrix.m14 + " " + matrix.m24 + " " + matrix.m34 + " " + matrix.m44 + "\n"
-  );
-}
-
-degreesToradians = degrees => degrees * ( Math.PI / 180);
-
 class Face {
   constructor(normal, name, color) {
     this.normal = normal;
@@ -76,53 +58,23 @@ class Cubie {
   }
 }
 
-const side = getComputedStyle(document.body).getPropertyValue('--length').slice(0, -2) / getComputedStyle(document.body).getPropertyValue('--length-ratio');
-const faces = ["up", "down", "front", "back", "right", "left"];
-const colors = ["white", "yellow", "green", "blue", "red", "orange"];
-const ratio = 2;
-let RubikCube = [];
-let index = 0;
-let sth = 0.00001;
-
-for (let x = -1; x <= 1; x++) {
-  for (let y = -1; y <= 1; y++) {
-    for (let z = -1; z <= 1; z++) {
-      let type = "";
-      let counts = {};
-
-      [x, y, z].forEach(t => counts[t] = (counts[t] || 0) + 1 );
-
-      switch ( counts["0"] ) {
-        case 3: type = "core"; break;
-        case 2: type = "center"; break;
-        case 1: type = "edge"; break;
-        default: type = "corner";
-      }
-
-      let name = "";
-      name += (y > 0) ? "U" : (y < 0) ? "D" : "";
-      name += (z > 0) ? "F" : (z < 0) ? "B" : "";
-      name += (x > 0) ? "L" : (x < 0) ? "R" : "";
-      name = (name == "") ? "core" : name;
-
-      let matrix = new DOMMatrix();
-      matrix = matrix.translate(x, y, z);
-
-      let f = [];
-      f.push(
-        new Face([0, -1, 0], faces[0], colors[0]), 
-        new Face([0, 1, 0], faces[1], colors[1]), 
-        new Face([0, 0, 1], faces[2], colors[2]), 
-        new Face([0, 0, -1], faces[3], colors[3]), 
-        new Face([1, 0, 0], faces[4], colors[4]), 
-        new Face([-1, 0, 0], faces[5], colors[5]), 
-      );
-
-      RubikCube[index] = new Cubie({x: x, y: y, z: z}, matrix, type, name, f);
-      index++;
-    }
-  }
+printMatrix2D = matrix => {
+  console.log("2d: \n" + 
+    matrix.a + " " + matrix.c + " " + matrix.e + "\n" + 
+    matrix.b + " " + matrix.d + " " + matrix.f + "\n"
+  );
 }
+
+printMatrix3D = matrix => {
+  console.log("3d: \n" + 
+    matrix.m11 + " " + matrix.m21 + " " + matrix.m31 + " " + matrix.m41 + "\n" + 
+    matrix.m12 + " " + matrix.m22 + " " + matrix.m32 + " " + matrix.m42 + "\n" + 
+    matrix.m13 + " " + matrix.m23 + " " + matrix.m33 + " " + matrix.m43 + "\n" + 
+    matrix.m14 + " " + matrix.m24 + " " + matrix.m34 + " " + matrix.m44 + "\n"
+  );
+}
+
+degreesToradians = degrees => degrees * ( Math.PI / 180);
 
 turnY = (index, dir, angle) => {
   for (let i = 0; i < RubikCube.length; i++) {
@@ -275,6 +227,54 @@ loop = () => {
   }
 
   requestAnimationFrame(loop);
+}
+
+const side = getComputedStyle(document.body).getPropertyValue('--length').slice(0, -2) / getComputedStyle(document.body).getPropertyValue('--length-ratio');
+const faces = ["up", "down", "front", "back", "right", "left"];
+const colors = ["white", "yellow", "green", "blue", "red", "orange"];
+const ratio = 2;
+let RubikCube = [];
+let index = 0;
+let sth = 0.00001;
+
+for (let x = -1; x <= 1; x++) {
+  for (let y = -1; y <= 1; y++) {
+    for (let z = -1; z <= 1; z++) {
+      let type = "";
+      let counts = {};
+
+      [x, y, z].forEach(t => counts[t] = (counts[t] || 0) + 1 );
+
+      switch ( counts["0"] ) {
+        case 3: type = "core"; break;
+        case 2: type = "center"; break;
+        case 1: type = "edge"; break;
+        default: type = "corner";
+      }
+
+      let name = "";
+      name += (y > 0) ? "U" : (y < 0) ? "D" : "";
+      name += (z > 0) ? "F" : (z < 0) ? "B" : "";
+      name += (x > 0) ? "L" : (x < 0) ? "R" : "";
+      name = (name == "") ? "core" : name;
+
+      let matrix = new DOMMatrix();
+      matrix = matrix.translate(x, y, z);
+
+      let f = [];
+      f.push(
+        new Face([0, -1, 0], faces[0], colors[0]), 
+        new Face([0, 1, 0], faces[1], colors[1]), 
+        new Face([0, 0, 1], faces[2], colors[2]), 
+        new Face([0, 0, -1], faces[3], colors[3]), 
+        new Face([1, 0, 0], faces[4], colors[4]), 
+        new Face([-1, 0, 0], faces[5], colors[5]), 
+      );
+
+      RubikCube[index] = new Cubie({x: x, y: y, z: z}, matrix, type, name, f);
+      index++;
+    }
+  }
 }
 
 generateRubik();
