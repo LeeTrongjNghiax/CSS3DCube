@@ -1,5 +1,5 @@
 :root {
-	--length: 210px;
+	--length: 310px;
 	--border-length: 1vh;
 	--length-ratio: 3;
 }
@@ -49,22 +49,13 @@ body {
 	background-color: rgba(0, 0, 200, 0);
 }
 
-#rubik-cube .cubie {
-	width: calc( var(--length) / var(--length-ratio) );
-	height: calc( var(--length) / var(--length-ratio) );
-	transform-style: preserve-3d;
-	position: absolute;
-	transition: transform 0.25s;
-
-  	background-color: rgba(200, 0, 0, 0);
-}
-
 .cubie-container {
 	position: absolute;
 	width: calc( var(--length) / var(--length-ratio) * 1 );
 	height: calc( var(--length) / var(--length-ratio) * 1 );
 	transform-style: preserve-3d;
     background-color: rgba(0, 0, 0, 0);
+	transition: transform 0.5s;
 }
 
 .face {
@@ -77,9 +68,9 @@ body {
 	justify-content: center;
 
 	border: var(--border-length) solid black;
-	opacity: 0.5;
-	/* opacity: 1; */
-	filter: brightness(10);
+	/* opacity: 0.5; */
+	opacity: 1;
+	filter: brightness(1);
 	font-size: 02vh;
 	font-weight: bolder;
 	color: black;
