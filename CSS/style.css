@@ -1,5 +1,5 @@
 :root {
-	--length: 310px;
+	--length: 210px;
 	--border-length: 1vh;
 	--length-ratio: 3;
 }
@@ -55,7 +55,7 @@ body {
 	height: calc( var(--length) / var(--length-ratio) * 1 );
 	transform-style: preserve-3d;
     background-color: rgba(0, 0, 0, 0);
-	transition: transform 0.5s;
+	transition: all 0.5s;
 }
 
 .face {
